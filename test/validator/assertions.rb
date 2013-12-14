@@ -13,7 +13,7 @@ module Assertions
   end
 
   def assert_raises_unless_schema(keyword, value = {})
-    raises_error = -> (*_) { fail JSchema::InvalidSchema }
+    raises_error = ->(*_) { fail JSchema::InvalidSchema }
     JSchema::Schema.stub :build, raises_error do
       assert_raises_for_values keyword, [value]
     end

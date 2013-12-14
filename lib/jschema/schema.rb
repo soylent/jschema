@@ -23,7 +23,7 @@ module JSchema
         # RFC 3986, cl. 5.1
         if parent
           if parent.uri.absolute?
-            URI.join(parent.uri, this_id).normalize
+            parent.uri.merge(this_id).normalize
           elsif parent.uri.path.empty?
             URI('#' + File.join(parent.uri.fragment, id || '')) # FIXME
           else

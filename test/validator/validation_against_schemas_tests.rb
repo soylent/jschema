@@ -1,6 +1,6 @@
 require_relative 'argument_is_array_of_schemas_tests'
 
-module ValidationAgainstSchemataTests
+module ValidationAgainstSchemasTests
   include SchemaValidationHelpers
   include ArgumentIsArrayOfSchemasTests
 

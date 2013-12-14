@@ -3,12 +3,12 @@ require 'jschema'
 
 require_relative 'assertions'
 require_relative 'schema_validation_helpers'
-require_relative 'validation_against_schemata_tests'
+require_relative 'validation_against_schemas_tests'
 
 class TestOneOf < MiniTest::Unit::TestCase
   include Assertions
   include SchemaValidationHelpers
-  include ValidationAgainstSchemataTests
+  include ValidationAgainstSchemasTests
 
   def test_passing_validation_against_schemas
     stub_schema_validations(true, false, false) do

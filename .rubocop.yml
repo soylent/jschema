@@ -1,0 +1,23 @@
+Documentation:
+  Enabled: false
+
+WordArray:
+  Enabled: false
+
+TrivialAccessors:
+  Enabled: false
+
+IfUnlessModifier:
+  Enabled: false
+
+Not:
+  Enabled: false
+
+CyclomaticComplexity:
+  Max: 8
+
+LineLength:
+  Max: 80
+
+MethodLength:
+  Max: 15

@@ -1,0 +1,34 @@
+[
+    {
+        "dimensions": {
+            "height": 9.5,
+            "length": 7.0,
+            "width": 12.0
+        },
+        "id": 2,
+        "name": "An ice sculpture",
+        "price": 12.5,
+        "tags": [
+            "cold",
+            "ice"
+        ],
+        "warehouseLocation": {
+            "latitude": -78.75,
+            "longitude": 20.4
+        }
+    },
+    {
+        "dimensions": {
+            "height": 1.0,
+            "length": 3.1,
+            "width": 1.0
+        },
+        "id": 3,
+        "name": "A blue mouse",
+        "price": 25.5,
+        "warehouseLocation": {
+            "latitude": 54.4,
+            "longitude": -32.7
+        }
+    }
+]

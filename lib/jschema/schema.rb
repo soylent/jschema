@@ -5,7 +5,8 @@ module JSchema
         schema = sch || {}
 
         if (json_reference = schema['$ref'])
-          SchemaRef.new(json_reference, parent)
+          ref_uri = URI(json_reference)
+          SchemaRef.new(ref_uri, parent)
         else
           uri = establish_uri(schema, parent, id)
           jschema = new(schema, uri, parent)

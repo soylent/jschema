@@ -3,12 +3,18 @@ module JSchema
     class Pattern < SimpleValidator
       private
 
+      # Fix because of Rubinius
+      unless defined? PrimitiveFailure
+        class PrimitiveFailure < Exception
+        end
+      end
+
       self.keywords = ['pattern']
 
       def validate_args(pattern)
         Regexp.new(pattern)
         true
-      rescue TypeError
+      rescue TypeError, PrimitiveFailure
         invalid_schema 'pattern', pattern
       end
 

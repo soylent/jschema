@@ -3,6 +3,7 @@ gemspec
 
 group :test do
   gem 'minitest'
+  gem 'webmock'
   gem 'rake'
 
   platforms :rbx do

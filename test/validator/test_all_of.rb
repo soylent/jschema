@@ -5,7 +5,7 @@ require_relative 'assertions'
 require_relative 'schema_validation_helpers'
 require_relative 'validation_against_schemas_tests'
 
-class TestAllOf < MiniTest::Unit::TestCase
+class TestAllOf < Minitest::Test
   include Assertions
   include SchemaValidationHelpers
   include ValidationAgainstSchemasTests

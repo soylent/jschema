@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assert_received'
 
-class TestSchema < MiniTest::Unit::TestCase
+class TestSchema < Minitest::Test
   def test_empty_schema
     JSchema::Validator.stub :build, [] do
       empty_schema = JSchema::Schema.build

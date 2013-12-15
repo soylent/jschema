@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestMultipleOf < MiniTest::Unit::TestCase
+class TestMultipleOf < Minitest::Test
   include Assertions
 
   def test_that_argument_is_a_number

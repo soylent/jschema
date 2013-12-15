@@ -4,7 +4,7 @@ require 'jschema'
 require_relative 'assertions'
 require_relative '../string_length_validator_tests'
 
-class TestMaxLength < MiniTest::Unit::TestCase
+class TestMaxLength < Minitest::Test
   include Assertions
   include StringLengthValidatorTests
 

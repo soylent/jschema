@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'jschema'
 require 'json'
 
-class TestIntegration < MiniTest::Unit::TestCase
+class TestIntegration < Minitest::Test
   def test_simple_schema
     validate 'json_schema1.json', 'json_data1.json'
   end

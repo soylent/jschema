@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestMinimum < MiniTest::Unit::TestCase
+class TestMinimum < Minitest::Test
   include Assertions
 
   def test_that_minimum_is_a_number

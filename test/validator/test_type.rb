@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestType < MiniTest::Unit::TestCase
+class TestType < Minitest::Test
   include Assertions
 
   def test_that_argument_is_a_string_or_an_array

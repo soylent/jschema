@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'jschema'
 require 'ostruct'
 
-class TestJSONReference < MiniTest::Unit::TestCase
+class TestJSONReference < Minitest::Test
   def test_schema_registration_and_dereferencing
     schema = OpenStruct.new(uri: 'registered')
     JSchema::JSONReference.register_schema schema

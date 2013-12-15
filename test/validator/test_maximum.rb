@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestMaximum < MiniTest::Unit::TestCase
+class TestMaximum < Minitest::Test
   include Assertions
 
   def test_that_maximum_is_a_number

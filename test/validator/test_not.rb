@@ -4,7 +4,7 @@ require 'jschema'
 require_relative 'assertions'
 require_relative 'schema_validation_helpers'
 
-class TestNot < MiniTest::Unit::TestCase
+class TestNot < Minitest::Test
   include Assertions
   include SchemaValidationHelpers
 

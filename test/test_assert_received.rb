@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require_relative 'assert_received'
 
-class TestAssertReceived < MiniTest::Unit::TestCase
+class TestAssertReceived < Minitest::Test
   def test_message_sending_without_params
     assert_received(Object, :class) do
       Object.class

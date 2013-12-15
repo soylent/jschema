@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestMinItems < MiniTest::Unit::TestCase
+class TestMinItems < Minitest::Test
   include Assertions
 
   def test_that_argument_is_non_negative_iteger

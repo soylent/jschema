@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestSimpleValidator < MiniTest::Unit::TestCase
+class TestSimpleValidator < Minitest::Test
   include Assertions
 
   def setup

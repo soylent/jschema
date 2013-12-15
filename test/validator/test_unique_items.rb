@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestUniqueItems < MiniTest::Unit::TestCase
+class TestUniqueItems < Minitest::Test
   include Assertions
 
   def test_that_argument_is_boolean

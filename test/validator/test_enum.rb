@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestEnum < MiniTest::Unit::TestCase
+class TestEnum < Minitest::Test
   include Assertions
 
   def test_that_argument_is_non_empty_array_of_unique_values

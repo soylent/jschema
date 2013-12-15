@@ -3,7 +3,7 @@ require 'jschema'
 
 require_relative 'assertions'
 
-class TestPattern < MiniTest::Unit::TestCase
+class TestPattern < Minitest::Test
   include Assertions
 
   def test_that_only_valid_regexp_is_allowed

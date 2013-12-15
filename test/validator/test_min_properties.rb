@@ -4,7 +4,7 @@ require 'jschema'
 require_relative 'assertions'
 require_relative 'properties_limit_tests'
 
-class TestMinProperties < MiniTest::Unit::TestCase
+class TestMinProperties < Minitest::Test
   include Assertions
   include PropertiesLimitTests
 

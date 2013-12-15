@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'jschema'
 
-class TestValidatorInstantiation < MiniTest::Unit::TestCase
+class TestValidatorInstantiation < Minitest::Test
   def test_creating_of_validators
     return_validator = Object.new
     assert_equal [return_validator], build_validators(return_validator)

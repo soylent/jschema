@@ -1,9 +1,13 @@
 require 'minitest/autorun'
+require 'webmock/minitest'
 require 'jschema'
 require 'json'
 
 class TestIntegration < Minitest::Test
   def test_simple_schema
+    stub_request(:get, 'http://json-schema.org/geo')
+      .to_return(body: Pathname.new('test/fixtures/geo.json'))
+
     validate 'json_schema1.json', 'json_data1.json'
   end
 

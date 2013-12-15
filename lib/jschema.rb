@@ -2,7 +2,7 @@ require 'bigdecimal'
 require 'uri'
 require 'delegate'
 
-require 'simplecov_config'
+require 'code_coverage'
 
 require 'jschema/json_reference'
 require 'jschema/schema_ref'

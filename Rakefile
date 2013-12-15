@@ -5,15 +5,10 @@ Rake::TestTask.new do |test|
   test.warning = true
 end
 
-desc 'Generate test coverage report'
-task :coverage do
-  Rake::TestTask.new(:coverage_test) do |test|
-    test.pattern = 'test'
-    test.loader = :testrb
-  end
-
+desc 'CI tasks'
+task :ci do
   ENV['COVERAGE'] = '1'
-  Rake::Task[:coverage_test].execute
+  Rake::Task[:test].execute
 end
 
-task default: :test
+task default: :ci

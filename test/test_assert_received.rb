@@ -9,7 +9,7 @@ class TestAssertReceived < Minitest::Test
   end
 
   def test_message_sending_with_params
-    assert_received(String, :==, Fixnum) do
+    assert_received(String, :==, [Fixnum]) do
       String == Fixnum
     end
   end
@@ -31,7 +31,7 @@ class TestAssertReceived < Minitest::Test
 
   def test_assertion_failure_when_unexpected_params_are_received
     assert_raises(MockExpectationError) do
-      assert_received(String, :==, Fixnum) do
+      assert_received(String, :==, [Fixnum]) do
         String == Bignum
       end
     end

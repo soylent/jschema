@@ -69,7 +69,7 @@ class TestSchema < Minitest::Test
   def test_storing_schema_in_registry
     sch = Object.new
     JSchema::Schema.stub :new, sch do
-      assert_received JSchema::JSONReference, :register_schema, sch do
+      assert_received JSchema::JSONReference, :register_schema, [sch] do
         JSchema::Schema.build
       end
     end

@@ -1,6 +1,6 @@
 module MiniTest
   module Assertions
-    def assert_received(receiver, message, *args)
+    def assert_received(receiver, message, args = [])
       mock = MiniTest::Mock.new
       mock.expect(message, nil, args)
       receiver_stub = ->(*arg) { mock.__send__ message, *arg }

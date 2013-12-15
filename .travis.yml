@@ -3,5 +3,6 @@ rvm:
   - ruby-1.9.3
   - ruby-2.0.0
   - ruby-head
-  - jruby
-  - rbx
+  - jruby-18mode
+  - rbx-18mode
+script: rake

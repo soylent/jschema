@@ -31,7 +31,7 @@ module JSchema
       end
 
       def download_schema(uri)
-        request = Net::HTTP::Get.new(uri)
+        request = Net::HTTP::Get.new(uri.to_s)
         request['Accept'] = 'application/json+schema'
 
         http = Net::HTTP.new(uri.hostname, uri.port)

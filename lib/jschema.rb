@@ -31,6 +31,7 @@ require 'jschema/validator/unique_items'
 require 'jschema/validator/multiple_of'
 require 'jschema/validator/maximum'
 require 'jschema/validator/minimum'
+require 'jschema/validator/format'
 
 module JSchema
   class InvalidSchema < StandardError; end

@@ -49,17 +49,17 @@
                             "type": "string"
                         },
                         "server": {
-                            //"oneOf": [
-                            //    {
-                            //        "format": "host-name"
-                            //    },
-                            //    {
-                            //        "format": "ipv4"
-                            //    },
-                            //    {
-                            //        "format": "ipv6"
-                            //    }
-                            //],
+                            "oneOf": [
+                                {
+                                    "format": "hostname"
+                                },
+                                {
+                                    "format": "ipv4"
+                                },
+                                {
+                                    "format": "ipv6"
+                                }
+                            ],
                             "type": "string"
                         },
                         "type": {

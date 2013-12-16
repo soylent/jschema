@@ -3,3 +3,4 @@ TODO
 coverage
 *.gem
 tags
+Gemfile.lock

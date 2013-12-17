@@ -10,5 +10,6 @@ group :test do
   platforms :rbx do
     gem 'rubysl'
     gem 'json'
+    gem 'rubinius-coverage', require: false
   end
 end

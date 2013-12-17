@@ -7,8 +7,13 @@ end
 
 desc 'CI tasks'
 task :ci do
-  ENV['COVERAGE'] = '1'
-  Rake::Task[:test].execute
+  require 'coveralls'
+  Coveralls.wear!
+
+  tests = Dir['test/**/test_*.rb']
+  tests.each do |test|
+    require_relative test
+  end
 end
 
 task default: :ci

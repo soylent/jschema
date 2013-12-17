@@ -2,8 +2,6 @@ require 'bigdecimal'
 require 'uri'
 require 'delegate'
 
-require 'code_coverage'
-
 require 'jschema/json_reference'
 require 'jschema/schema_ref'
 require 'jschema/schema'

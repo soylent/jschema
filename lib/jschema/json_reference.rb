@@ -1,16 +1,21 @@
 module JSchema
   module JSONReference
+    @mutex = Mutex.new
     @schemas = {}
 
     class << self
       def register_schema(schema)
         schema_key = key(schema.uri, schema)
-        @schemas[schema_key] = schema
+        @mutex.synchronize do
+          @schemas[schema_key] = schema
+        end
       end
 
       def dereference(uri, schema)
         schema_key = key(uri, schema)
-        @schemas[schema_key] || build_external_schema(uri, schema)
+        @mutex.synchronize do
+          @schemas[schema_key]
+        end || build_external_schema(uri, schema)
       end
 
       private

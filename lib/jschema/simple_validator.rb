@@ -14,9 +14,10 @@ module JSchema
       attr_accessor :keywords
     end
 
-    attr_reader :parent
+    attr_reader :parent, :errors
 
     def initialize(*args, parent)
+      @errors = []
       @parent = parent
 
       if validate_args(*args)
@@ -28,13 +29,20 @@ module JSchema
 
     def valid?(instance)
       if !applicable_types || applicable_types.include?(instance.class)
-        valid_instance?(instance)
+        valid_instance?(instance) || add_error(instance)
       else
         true
       end
     end
 
     private
+
+    def add_error(instance)
+      validator_name = self.class.name
+      @errors <<
+        "#{validator_name} validation failed against #{instance.inspect}"
+      false
+    end
 
     # Hook method
     def applicable_types; end

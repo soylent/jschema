@@ -46,17 +46,20 @@ module JSchema
       end
     end
 
-    attr_reader :uri, :parent
+    attr_reader :uri, :parent, :errors
 
     def valid?(instance)
       @validators.all? do |validator|
-        validator.valid?(instance)
+        validator.valid?(instance).tap do |valid|
+          @errors.concat validator.errors unless valid
+        end
       end
     end
 
     private
 
     def initialize(schema, uri, parent)
+      @errors = []
       @uri = uri
       @parent = parent
       @validators = Validator.build(schema, self)

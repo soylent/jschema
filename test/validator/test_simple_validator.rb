@@ -47,12 +47,14 @@ class TestSimpleValidator < Minitest::Test
   def test_passing_validation
     stub_validator nil, true do |vdr|
       assert vdr.valid?('instance')
+      assert_empty vdr.errors
     end
   end
 
   def test_failing_validation
     stub_validator nil, false do |vdr|
       refute vdr.valid?('instance')
+      refute_empty vdr.errors
     end
   end
 

@@ -14,12 +14,14 @@ class TestSchema < Minitest::Test
   def test_passing_validation
     stub_validators('instance', true) do |schema|
       assert schema.valid?('instance')
+      assert_empty schema.errors
     end
   end
 
   def test_failing_validation
     stub_validators('instance', false) do |schema|
       refute schema.valid?('instance')
+      refute_empty schema.errors
     end
   end
 
@@ -88,6 +90,7 @@ class TestSchema < Minitest::Test
   def stub_validators(instance, ret_val)
     validator = Minitest::Mock.new
     validator.expect :valid?, ret_val, [instance]
+    validator.expect :errors, ['error'] unless ret_val
     JSchema::Validator.stub :build, [validator] do
       yield JSchema::Schema.build
     end

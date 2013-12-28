@@ -69,6 +69,10 @@ module JSchema
       end.compact
     end
 
+    def to_s
+      uri.to_s
+    end
+
     private
 
     def initialize(schema, uri, parent)

@@ -91,6 +91,11 @@ class TestSchema < Minitest::Test
     end
   end
 
+  def test_to_s
+    schema = JSchema::Schema.build
+    assert_equal '#', schema.to_s
+  end
+
   private
 
   def stub_validators(ret_val)

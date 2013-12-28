@@ -13,6 +13,8 @@ If you are not familiar with JSON schema, please study
 ## Synopsis
 
 ```ruby
+  require 'jschema'
+
   # Creating a new schema
   schema = JSchema::Schema.build('type' => 'string')
 

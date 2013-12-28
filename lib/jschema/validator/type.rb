@@ -39,10 +39,18 @@ module JSchema
         end
       end
 
-      # REFACTOR
       def error_message(instance)
-        types = @json_types[0..-2].join(', ') << ", or #{@json_types.last}"
-        "#{instance.inspect} must be #{types}"
+        types =
+          case @json_types.size
+          when 1
+            @json_types.first
+          when 2
+            @json_types.join(' or ')
+          when 3..Float::INFINITY
+            @json_types[0..-2].join(', ') << ", or #{@json_types.last}"
+          end
+
+        "#{instance.inspect} must be a #{types}"
       end
     end
   end

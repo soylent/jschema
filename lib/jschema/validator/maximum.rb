@@ -16,11 +16,10 @@ module JSchema
         @exclusive_maximum = exclusive_maximum
       end
 
-      def valid_instance?(instance)
-        if @exclusive_maximum
-          instance < @maximum
-        else
-          instance <= @maximum
+      def validate_instance(instance)
+        method = @exclusive_maximum ? :< : :<=
+        unless instance.public_send(method, @maximum)
+          "#{instance} must be #{method} than #{@maximum}"
         end
       end
 

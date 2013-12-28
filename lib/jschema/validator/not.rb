@@ -13,8 +13,10 @@ module JSchema
         @schema = Schema.build(not_schema, parent, 'not')
       end
 
-      def valid_instance?(instance)
-        !@schema.valid?(instance)
+      def validate_instance(instance)
+        if @schema.valid?(instance)
+          "#{instance} must not validate against #{@schema}"
+        end
       end
     end
   end

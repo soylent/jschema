@@ -5,7 +5,12 @@ module SchemaValidationHelpers
     end
 
     def valid?(instance)
-      @validation_results.next
+      validate(instance).empty?
+    end
+
+    def validate(instance)
+      result = @validation_results.next
+      result ? [] : ['error']
     end
   end
 

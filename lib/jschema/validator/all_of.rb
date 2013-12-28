@@ -15,9 +15,13 @@ module JSchema
         end
       end
 
-      def valid_instance?(instance)
-        @all_of.all? do |schema|
+      def validate_instance(instance)
+        valid = @all_of.all? do |schema|
           schema.valid?(instance)
+        end
+
+        unless valid
+          "#{instance} must be valid against all the schemas"
         end
       end
     end

@@ -21,8 +21,10 @@ module JSchema
         [Hash]
       end
 
-      def valid_instance?(instance)
-        instance.keys.size <= @max_properties
+      def validate_instance(instance)
+        if instance.keys.size > @max_properties
+          "#{instance} has too many properties"
+        end
       end
     end
   end

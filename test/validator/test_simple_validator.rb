@@ -20,7 +20,7 @@ class TestSimpleValidator < Minitest::Test
       def post_initialize(param)
       end
 
-      def valid_instance?(param)
+      def validate_instance(param)
       end
 
       def applicable_types
@@ -47,14 +47,14 @@ class TestSimpleValidator < Minitest::Test
   def test_passing_validation
     stub_validator nil, true do |vdr|
       assert vdr.valid?('instance')
-      assert_empty vdr.errors
+      assert_nil vdr.validate('instance')
     end
   end
 
   def test_failing_validation
     stub_validator nil, false do |vdr|
       refute vdr.valid?('instance')
-      refute_empty vdr.errors
+      assert_equal 'error', vdr.validate('instance')
     end
   end
 
@@ -84,10 +84,11 @@ class TestSimpleValidator < Minitest::Test
 
   private
 
-  def stub_validator(applicable_types, validation_result)
+  def stub_validator(applicable_types, valid)
     validator_example = validator 'test'
+    validation_result = valid ? nil : 'error'
     validator_example.stub :applicable_types, applicable_types do
-      validator_example.stub :valid_instance?, validation_result do
+      validator_example.stub :validate_instance, validation_result do
         yield validator_example
       end
     end

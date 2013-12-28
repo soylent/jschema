@@ -13,8 +13,10 @@ module JSchema
         @enum = enum
       end
 
-      def valid_instance?(instance)
-        @enum.include? instance
+      def validate_instance(instance)
+        unless @enum.include? instance
+          "#{instance} must be one of: #{@enum.join(', ')}"
+        end
       end
     end
   end

@@ -93,8 +93,8 @@ class TestDependencies < Minitest::Test
   def expect_required_validation(valid)
     validator_stub =
       Struct.new(:valid) do
-        def valid?(_)
-          valid
+        def validate(_)
+          valid ? [] : ['error']
         end
       end
 

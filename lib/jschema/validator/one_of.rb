@@ -15,9 +15,13 @@ module JSchema
         end
       end
 
-      def valid_instance?(instance)
-        @one_of.one? do |schema|
+      def validate_instance(instance)
+        valid = @one_of.one? do |schema|
           schema.valid?(instance)
+        end
+
+        unless valid
+          "#{instance} must be valid against exactly one schema"
         end
       end
     end

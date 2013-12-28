@@ -22,8 +22,10 @@ module JSchema
         @pattern = pattern
       end
 
-      def valid_instance?(instance)
-        !!instance.match(@pattern)
+      def validate_instance(instance)
+        unless instance.match(@pattern)
+          "#{instance} must match pattern #{@pattern.inspect}"
+        end
       end
 
       def applicable_types

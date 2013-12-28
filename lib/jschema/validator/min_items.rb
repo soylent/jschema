@@ -14,8 +14,10 @@ module JSchema
         @min_items = min_items
       end
 
-      def valid_instance?(instance)
-        instance.size >= @min_items
+      def validate_instance(instance)
+        if instance.size < @min_items
+          "#{instance} has too few items"
+        end
       end
 
       def applicable_types

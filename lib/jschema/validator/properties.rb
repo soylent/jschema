@@ -46,19 +46,22 @@ module JSchema
         [Hash]
       end
 
-      def valid_instance?(instance)
+      def validate_instance(instance)
         instance.each do |field, value|
           schemas = schemas_for(field)
 
           if schemas.empty? && @additional_properties == false
-            return false
+            return "#{instance} must not have any additional fields"
           end
 
-          unless schemas.all? { |schema| schema.valid?(value) }
-            return false
+          schemas.each do |schema|
+            validation_errors = schema.validate(value)
+            unless validation_errors.empty?
+              return validation_errors.first
+            end
           end
         end
-        true
+        nil
       end
 
       private

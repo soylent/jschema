@@ -6,18 +6,18 @@ module JSchema
       self.keywords = ['items', 'additionalItems']
 
       def validate_args(items, additional_items)
-        validate_additional_items additional_items
-        validate_items items
+        additional_items_valid? additional_items
+        items_valid? items
       end
 
-      def validate_additional_items(additional_items)
+      def additional_items_valid?(additional_items)
         additional_items.nil? ||
         boolean?(additional_items) ||
         valid_schema?(additional_items) ||
           invalid_schema('additionalItems', additional_items)
       end
 
-      def validate_items(items)
+      def items_valid?(items)
         items.nil? ||
         valid_schema?(items) ||
         schema_array?(items) ||
@@ -29,23 +29,29 @@ module JSchema
         @additional_items = additional_items
       end
 
-      def valid_instance?(instance)
-        additional_items_allowed?(instance) &&
-        all_items_valid?(instance)
+      def validate_instance(instance)
+        validate_additional_items(instance) ||
+        validate_all_items(instance)
       end
 
-      def additional_items_allowed?(instance)
-        not
-          @additional_items == false &&
-          @items.is_a?(Array) &&
-          @items.size < instance.size
-      end
+      def validate_additional_items(instance)
+        if @additional_items == false &&
+           @items.is_a?(Array) &&
+           @items.size < instance.size
 
-      def all_items_valid?(instance)
-        instance.to_enum.with_index.all? do |item, index|
-          schema = schema_for_item(index)
-          schema.valid?(item)
+          "#{instance} must not contain any additional items"
         end
+      end
+
+      def validate_all_items(instance)
+        instance.to_enum.each_with_index do |item, index|
+          schema = schema_for_item(index)
+          validation_errors = schema.validate(item)
+          unless validation_errors.empty?
+            return validation_errors.first
+          end
+        end
+        nil
       end
 
       def schema_for_item(index)

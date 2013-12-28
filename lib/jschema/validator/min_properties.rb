@@ -21,8 +21,10 @@ module JSchema
         [Hash]
       end
 
-      def valid_instance?(instance)
-        instance.keys.size >= @min_properties
+      def validate_instance(instance)
+        if instance.keys.size < @min_properties
+          "#{instance} has too few properties"
+        end
       end
     end
   end

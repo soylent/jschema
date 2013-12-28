@@ -17,13 +17,13 @@ module JSchema
         [Hash]
       end
 
-      def valid_instance?(instance)
-        @required.all? do |required_property|
-          !instance[required_property].nil?
-        end
+      def validate_instance(instance)
+        @required.each do |required_property|
+          if instance[required_property].nil?
+            return "#{instance} must have property `#{required_property}`"
+          end
+        end and nil
       end
-
-      private
 
       def valid_required?(required)
         unique_non_empty_array?(required) &&

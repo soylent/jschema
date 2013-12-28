@@ -14,19 +14,17 @@ module JSchema
       end
 
       def post_initialize(type)
-        json_types = Array(type)
-        @ruby_classes = json_types.map do |json_type|
+        @json_types = Array(type)
+        @ruby_classes = @json_types.map do |json_type|
           json_type_to_ruby_class(json_type)
         end.flatten.compact
       end
 
-      def valid_instance?(instance)
-        @ruby_classes.one? do |type|
-          instance.is_a?(type)
+      def validate_instance(instance)
+        unless @ruby_classes.one? { |type| instance.is_a?(type) }
+          error_message(instance)
         end
       end
-
-      private
 
       def json_type_to_ruby_class(json_type)
         case json_type
@@ -39,6 +37,12 @@ module JSchema
         when 'number'  then [Fixnum, Float, BigDecimal, Bignum]
         else invalid_schema('type', json_type)
         end
+      end
+
+      # REFACTOR
+      def error_message(instance)
+        types = @json_types[0..-2].join(', ') << ", or #{@json_types.last}"
+        "#{instance.inspect} must be #{types}"
       end
     end
   end

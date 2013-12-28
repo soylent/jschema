@@ -12,16 +12,16 @@ class TestSchema < Minitest::Test
   end
 
   def test_passing_validation
-    stub_validators('instance', true) do |schema|
+    stub_validators(true) do |schema|
       assert schema.valid?('instance')
-      assert_empty schema.errors
+      assert_empty schema.validate('instance')
     end
   end
 
   def test_failing_validation
-    stub_validators('instance', false) do |schema|
+    stub_validators(false) do |schema|
       refute schema.valid?('instance')
-      refute_empty schema.errors
+      refute_empty schema.validate('instance')
     end
   end
 
@@ -87,14 +87,19 @@ class TestSchema < Minitest::Test
 
   private
 
-  def stub_validators(instance, ret_val)
-    validator = Minitest::Mock.new
-    validator.expect :valid?, ret_val, [instance]
-    validator.expect :errors, ['error'] unless ret_val
+  def stub_validators(ret_val)
+    validator = validator_stub.new(ret_val)
     JSchema::Validator.stub :build, [validator] do
       yield JSchema::Schema.build
     end
-    validator.verify
+  end
+
+  def validator_stub
+    Struct.new(:valid) do
+      def validate(_)
+        valid ? nil : ['error']
+      end
+    end
   end
 
   def schema_uri(schema_id = nil, parent_id = nil, id = nil)

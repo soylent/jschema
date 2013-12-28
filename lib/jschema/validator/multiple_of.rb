@@ -17,9 +17,11 @@ module JSchema
         @multiple_of = multiple_of
       end
 
-      def valid_instance?(instance)
+      def validate_instance(instance)
         div_remainder = instance.abs % @multiple_of
-        div_remainder.abs < 1e-6
+        unless div_remainder.abs < 1e-6
+          "#{instance} must be a multiple of #{@multiple_of}"
+        end
       end
 
       def applicable_types

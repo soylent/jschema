@@ -49,11 +49,13 @@ module JSchema
     attr_reader :uri, :parent, :errors
 
     def valid?(instance)
-      @validators.all? do |validator|
-        validator.valid?(instance).tap do |valid|
-          @errors.concat validator.errors unless valid
-        end
-      end
+      validate(instance).empty?
+    end
+
+    def validate(instance)
+      @validators.map do |validator|
+        validator.validate(instance)
+      end.compact
     end
 
     private

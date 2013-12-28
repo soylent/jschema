@@ -22,8 +22,10 @@ module JSchema
         @validator_method = format.gsub('-', '_')
       end
 
-      def valid_instance?(instance)
-        send(@validator_method, instance)
+      def validate_instance(instance)
+        unless send(@validator_method, instance)
+          "#{instance} must be a #{@validator_method}"
+        end
       end
 
       def applicable_types

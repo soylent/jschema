@@ -16,11 +16,10 @@ module JSchema
         @exclusive_minimum = exclusive_minimum
       end
 
-      def valid_instance?(instance)
-        if @exclusive_minimum
-          instance > @minimum
-        else
-          instance >= @minimum
+      def validate_instance(instance)
+        method = @exclusive_minimum ? :> : :>=
+        unless instance.public_send(method, @minimum)
+          "#{instance} must be #{method} than #{@minimum}"
         end
       end
 

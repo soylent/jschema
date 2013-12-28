@@ -31,24 +31,25 @@ module JSchema
         @dependencies = dependencies
       end
 
-      def valid_instance?(instance)
-        @dependencies.all? do |property, validator|
+      def validate_instance(instance)
+        @dependencies.each do |property, validator|
           if instance.key?(property)
-            validate_against_dependency(instance, validator, property)
-          else
-            true
+            errors = validate_against_dependency(instance, validator, property)
+            unless errors.empty?
+              return errors.first
+            end
           end
-        end
+        end and nil
       end
 
       def validate_against_dependency(instance, validator, property)
         case validator
         when Hash
           schema = Schema.build(validator, parent, property)
-          schema.valid?(instance)
+          schema.validate(instance)
         when Array
           required = Validator::Required.new(validator)
-          required.valid?(instance)
+          required.validate(instance)
         else
           fail UnknownError
         end

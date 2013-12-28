@@ -13,14 +13,14 @@ module JSchema
       def additional_items_valid?(additional_items)
         additional_items.nil? ||
         boolean?(additional_items) ||
-        valid_schema?(additional_items) ||
+        valid_schema?(additional_items, 'additionalItems') ||
           invalid_schema('additionalItems', additional_items)
       end
 
       def items_valid?(items)
         items.nil? ||
-        valid_schema?(items) ||
-        schema_array?(items) ||
+        valid_schema?(items, 'items') ||
+        schema_array?(items, 'items') ||
           invalid_schema('items', items)
       end
 

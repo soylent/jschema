@@ -6,7 +6,7 @@ module JSchema
       self.keywords = ['not']
 
       def validate_args(schema)
-        valid_schema?(schema) || invalid_schema('not', schema)
+        valid_schema?(schema, 'not') || invalid_schema('not', schema)
       end
 
       def post_initialize(not_schema)

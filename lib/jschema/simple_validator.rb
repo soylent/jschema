@@ -69,14 +69,16 @@ module JSchema
       value.size == value.uniq.size
     end
 
-    def schema_array?(value)
+    def schema_array?(value, id)
       unique_non_empty_array?(value) &&
-      value.all? { |schema| valid_schema?(schema) }
+      value.to_enum.with_index.all? do |schema, index|
+        full_id = [id, index].join('/')
+        valid_schema? schema, full_id
+      end
     end
 
-    def valid_schema?(schema)
-      # OPTIMIZE: schema is initialized twice.
-      schema.is_a?(Hash) && !!Schema.build(schema, parent)
+    def valid_schema?(schema, id)
+      schema.is_a?(Hash) && !!Schema.build(schema, parent, id)
     rescue InvalidSchema
       false
     end

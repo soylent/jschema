@@ -6,7 +6,7 @@ module JSchema
       self.keywords = ['anyOf']
 
       def validate_args(any_of)
-        schema_array?(any_of) || invalid_schema('anyOf', any_of)
+        schema_array?(any_of, 'anyOf') || invalid_schema('anyOf', any_of)
       end
 
       def post_initialize(any_of)

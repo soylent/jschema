@@ -57,7 +57,7 @@ module JSchema
       end
     end
 
-    attr_reader :uri, :parent, :errors
+    attr_reader :uri, :parent
 
     def valid?(instance)
       validate(instance).empty?
@@ -72,7 +72,6 @@ module JSchema
     private
 
     def initialize(schema, uri, parent)
-      @errors = []
       @uri = uri
       @parent = parent
       @validators = Validator.build(schema, self)

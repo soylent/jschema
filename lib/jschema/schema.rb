@@ -1,8 +1,12 @@
 module JSchema
   class Schema
+    VERSION_ID = 'http://json-schema.org/draft-04/schema#'.freeze
+
     class << self
       def build(sch = {}, parent = nil, id = nil)
         schema = sch || {}
+
+        check_schema_version schema
 
         if (json_reference = schema['$ref'])
           ref_uri = URI(json_reference)
@@ -16,6 +20,13 @@ module JSchema
       end
 
       private
+
+      def check_schema_version(schema)
+        version = schema['$schema']
+        if version && version != VERSION_ID
+          fail InvalidSchema, 'Specified schema version is not supported'
+        end
+      end
 
       # rubocop:disable MethodLength
       def establish_uri(schema, parent, id)

@@ -85,6 +85,12 @@ class TestSchema < Minitest::Test
     assert_equal URI(schema_def_uri), definition.uri
   end
 
+  def test_that_exception_is_raised_when_schema_version_is_not_supported
+    assert_raises(JSchema::InvalidSchema) do
+      JSchema::Schema.build('$schema' => 'unsupported')
+    end
+  end
+
   private
 
   def stub_validators(ret_val)

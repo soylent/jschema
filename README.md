@@ -16,7 +16,7 @@ If you are not familiar with JSON schema, please study
   require 'jschema'
 
   # Creating a new schema
-  schema = JSchema::Schema.build('type' => 'string')
+  schema = JSchema.build('type' => 'string')
 
   # Validating data and inspecting validation errors
   schema.validate 0    # => ["`0` must be a string"]

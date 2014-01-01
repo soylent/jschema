@@ -1,5 +1,5 @@
 module JSchema
   module Validator
-    MaxItems = JSchema::ItemsLimitValidator('maxItems', '>')
+    MaxItems = JSchema::ItemsSizeValidator('maxItems', '>')
   end
 end

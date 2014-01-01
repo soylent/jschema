@@ -1,5 +1,5 @@
 module JSchema
   module Validator
-    MinItems = JSchema::ItemsLimitValidator('minItems', '<')
+    MinItems = JSchema::ItemsSizeValidator('minItems', '<')
   end
 end

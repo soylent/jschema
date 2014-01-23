@@ -1,9 +1,12 @@
 # JSON Schema validator
 
-If you are not familiar with JSON schema, please study
-[JSON Schema](http://json-schema.org)
+[JSON Schema Documentation](http://json-schema.org/)
 
-## About
+[![Build Status](https://travis-ci.org/Soylent/jschema.png?branch=master)](https://travis-ci.org/Soylent/jschema)
+[![Coverage Status](https://coveralls.io/repos/Soylent/jschema/badge.png?branch=master)](https://coveralls.io/r/Soylent/jschema?branch=master)
+[![Dependency Status](https://gemnasium.com/Soylent/jschema.png)](https://gemnasium.com/Soylent/jschema)
+
+## About this gem
 
  - Implements JSON Schema draft 4 strictly according to the specification
  - Small, efficient and thread-safe

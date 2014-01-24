@@ -40,8 +40,9 @@ class TestItems < Minitest::Test
   end
 
   def test_passing_validation_by_items_schema_array
+    basic_schema = generate_schema
     stub_schema_validations(true) do
-      schema = { 'items' => [generate_schema, generate_schema] }
+      schema = { 'items' => [basic_schema, basic_schema] }
       assert build_from_schema(schema).valid?(['test', 'test'])
     end
   end

@@ -26,7 +26,7 @@ module JSchema
       end
 
       def valid_required?(required)
-        unique_non_empty_array?(required) &&
+        non_empty_array?(required) &&
         required.all? { |req| req.is_a?(String) }
       end
     end

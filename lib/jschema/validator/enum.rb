@@ -6,7 +6,7 @@ module JSchema
       self.keywords = ['enum']
 
       def validate_args(enum)
-        unique_non_empty_array?(enum) || invalid_schema('enum', enum)
+        non_empty_array?(enum) || invalid_schema('enum', enum)
       end
 
       def post_initialize(enum)

@@ -6,7 +6,7 @@ module JSchema
       self.keywords = ['type']
 
       def validate_args(type)
-        if type.is_a?(String) || unique_non_empty_array?(type)
+        if type.is_a?(String) || non_empty_array?(type)
           true
         else
           invalid_schema 'type', type

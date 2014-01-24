@@ -20,7 +20,7 @@ module JSchema
       def items_valid?(items)
         items.nil? ||
         valid_schema?(items, 'items') ||
-        schema_array?(items, 'items') ||
+        schema_array?(items, 'items', false) ||
           invalid_schema('items', items)
       end
 

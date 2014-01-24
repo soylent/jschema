@@ -23,7 +23,7 @@ module JSchema
       end
 
       def valid_property_dependency?(dependency)
-        unique_non_empty_array?(dependency) &&
+        non_empty_array?(dependency) &&
         dependency.all? { |property| property.is_a?(String) }
       end
 

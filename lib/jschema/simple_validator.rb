@@ -63,14 +63,17 @@ module JSchema
       integer?(value) || value.is_a?(Float) || value.is_a?(BigDecimal)
     end
 
-    def unique_non_empty_array?(value)
-      value.is_a?(Array) &&
-      !value.empty? &&
-      value.size == value.uniq.size
+    def non_empty_array?(value, uniqueness_check = true)
+      result = value.is_a?(Array) && !value.empty?
+      if uniqueness_check
+        result && value.size == value.uniq.size
+      else
+        result
+      end
     end
 
-    def schema_array?(value, id)
-      unique_non_empty_array?(value) &&
+    def schema_array?(value, id, uniqueness_check = true)
+      non_empty_array?(value, uniqueness_check) &&
       value.to_enum.with_index.all? do |schema, index|
         full_id = [id, index].join('/')
         valid_schema? schema, full_id

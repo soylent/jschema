@@ -28,6 +28,11 @@ class TestItems < Minitest::Test
     assert_raises_unless_schema_array 'items'
   end
 
+  def test_default_value_for_items
+    validator = build_from_schema('additionalItems' => false)
+    assert validator.valid? [1, 2, 3]
+  end
+
   def test_passing_validation_by_items_schema
     stub_schema_validations(true) do
       assert build_from_schema('items' => {}).valid?(['test'])

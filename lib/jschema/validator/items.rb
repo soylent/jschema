@@ -25,7 +25,7 @@ module JSchema
       end
 
       def post_initialize(items, additional_items)
-        @items = items
+        @items = items || {}
         @additional_items = additional_items
       end
 

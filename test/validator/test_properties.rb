@@ -17,14 +17,6 @@ class TestProperties < Minitest::Test
     end
   end
 
-  def test_invalid_properties_schema_argument
-    keywords.each do |keyword|
-      assert_raises(JSchema::InvalidSchema) do
-        build_from_schema(keyword => { 'test' => 1 })
-      end
-    end
-  end
-
   def test_passing_properties_validation_by_sub_schema
     keywords.each do |keyword|
       assert_passing_validation keyword

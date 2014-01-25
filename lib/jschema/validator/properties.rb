@@ -32,8 +32,7 @@ module JSchema
       end
 
       def valid_properties?(properties)
-        properties.nil? ||
-          (properties.is_a?(Hash) && properties.all? { |_, v| v.is_a?(Hash) })
+        properties.nil? || properties.is_a?(Hash)
       end
 
       def post_initialize(properties, pattern_properties, additional_properties)

@@ -29,7 +29,7 @@ class TestJSONReference < Minitest::Test
     expected_schema_args = [external_schema, URI(schema_uri), nil]
     assert_received JSchema::Schema, :new, expected_schema_args do
       JSchema::JSONReference.stub :register_schema, nil do
-        dereference_external_schema schema_uri, external_schema.to_json
+        dereference_external_schema schema_uri, external_schema.to_json, false
       end
     end
   end
@@ -64,13 +64,14 @@ class TestJSONReference < Minitest::Test
 
   private
 
-  def dereference_external_schema(uri, response_schema)
+  def dereference_external_schema(uri, response_schema, parent = true)
     stub_request(:get, uri).to_return(body: response_schema)
-    dereference generate_schema(uri)
+    dereference generate_schema(uri), parent
   end
 
-  def dereference(schema)
-    JSchema::JSONReference.dereference(schema.uri, schema)
+  def dereference(schema, parent = true)
+    parent_schema = parent ? schema : nil
+    JSchema::JSONReference.dereference(schema.uri, parent_schema)
   end
 
   def generate_schema(uri)

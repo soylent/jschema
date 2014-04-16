@@ -11,6 +11,7 @@
  - Implements JSON Schema draft 4 strictly according to the specification
  - Small, efficient and thread-safe
  - It uses only standard ruby libs
+ - Clean and extensible code
  - Tested on Rubinius, MRI, and JRuby
 
 ## Synopsis
@@ -18,14 +19,14 @@
 ```ruby
   require 'jschema'
 
-  # Creating a new schema
+  # Create a new schema
   schema = JSchema.build('type' => 'string')
 
-  # Validating data and inspecting validation errors
+  # Validate input and return an array of validation errors
   schema.validate 0    # => ["`0` must be a string"]
   schema.validate 'ok' # => []
 
-  # Or you can just validate data
+  # Validate input and return boolean value indicating validation result
   schema.valid? 0    # => false
   schema.valid? 'ok' # => true
 ```

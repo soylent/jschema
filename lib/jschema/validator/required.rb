@@ -19,7 +19,7 @@ module JSchema
 
       def validate_instance(instance)
         @required.each do |required_property|
-          if instance[required_property].nil?
+          unless instance.key?(required_property)
             return "#{instance} must have property `#{required_property}`"
           end
         end and nil

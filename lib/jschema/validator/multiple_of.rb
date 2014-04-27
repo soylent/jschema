@@ -18,8 +18,9 @@ module JSchema
       end
 
       def validate_instance(instance)
-        div_remainder = instance.abs % @multiple_of
-        unless div_remainder.abs < 1e-6
+        number = BigDecimal.new(instance.to_s)
+        div_remainder = number % @multiple_of
+        unless div_remainder == 0
           "#{instance} must be a multiple of #{@multiple_of}"
         end
       end

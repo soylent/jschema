@@ -2,9 +2,6 @@ module JSchema
   class SimpleValidator
     class << self
       def build(schema, parent)
-        # Validator keywords must be explicitly specified.
-        fail UnknownError unless keywords
-
         args = schema.values_at(*keywords)
         new(*args, parent) unless args.compact.empty?
       end

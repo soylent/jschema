@@ -66,11 +66,17 @@ module JSchema
       private
 
       def schemas_for(field)
-        [
-          properties_schema(field),
-          additional_properties_schema(field),
-          *pattern_properties_schema(field)
-        ].compact
+        schemas = pattern_properties_schema(field)
+
+        if (psch = properties_schema(field))
+          schemas << psch
+        end
+
+        if schemas.empty? && (asch = additional_properties_schema)
+          schemas << asch
+        end
+
+        schemas
       end
 
       def properties_schema(field)
@@ -81,11 +87,9 @@ module JSchema
         end
       end
 
-      def additional_properties_schema(field)
+      def additional_properties_schema
         if @additional_properties.is_a?(Hash)
-          if (sch = @additional_properties[field])
-            Schema.build(sch, parent, 'additionalProperties')
-          end
+          Schema.build(@additional_properties, parent, 'additionalProperties')
         end
       end
 

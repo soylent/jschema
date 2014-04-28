@@ -48,8 +48,8 @@ module JSchema
           schema = Schema.build(validator, parent, property)
           schema.validate(instance)
         when Array
-          required = Validator::Required.new(validator)
-          required.validate(instance)
+          required = Validator::Required.new(validator, nil)
+          Array required.validate(instance)
         else
           fail UnknownError
         end

@@ -94,7 +94,7 @@ class TestDependencies < Minitest::Test
     validator_stub =
       Struct.new(:valid) do
         def validate(_)
-          valid ? [] : ['error']
+          'error' unless valid
         end
       end
 

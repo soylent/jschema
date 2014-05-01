@@ -6,6 +6,7 @@ group :test do
   gem 'webmock'
   gem 'rake'
   gem 'coveralls', require: false
+  gem 'pry', require: false
 
   platforms :rbx do
     gem 'rubysl'

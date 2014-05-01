@@ -1,5 +1,7 @@
 require 'rake/testtask'
 
+load 'json_schema_tests.rake'
+
 Rake::TestTask.new do |test|
   test.pattern = 'test/**/test_*.rb'
   test.warning = true

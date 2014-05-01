@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/Soylent/jschema.png?branch=master)](https://travis-ci.org/Soylent/jschema)
 [![Coverage Status](https://coveralls.io/repos/Soylent/jschema/badge.png?branch=master)](https://coveralls.io/r/Soylent/jschema?branch=master)
-[![Dependency Status](https://gemnasium.com/Soylent/jschema.png)](https://gemnasium.com/Soylent/jschema)
+[![Code Climate](https://codeclimate.com/github/Soylent/jschema.png)](https://codeclimate.com/github/Soylent/jschema)
 
 ## About this gem
 

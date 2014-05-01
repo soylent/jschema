@@ -1,6 +1,7 @@
-NOTES
 TODO
 coverage
 *.gem
 tags
 Gemfile.lock
+JSON-Schema-Test-Suite/
+.ruby-version

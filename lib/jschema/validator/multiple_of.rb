@@ -14,7 +14,7 @@ module JSchema
       end
 
       def post_initialize(multiple_of)
-        @multiple_of = multiple_of
+        @multiple_of = BigDecimal.new(multiple_of.to_s)
       end
 
       def validate_instance(instance)

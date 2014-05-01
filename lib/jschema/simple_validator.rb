@@ -6,7 +6,7 @@ module JSchema
         new(*args, parent) unless args.compact.empty?
       end
 
-      private
+      protected
 
       attr_accessor :keywords
     end

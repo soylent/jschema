@@ -17,37 +17,128 @@ documentation – [JSON Schema Documentation](http://json-schema.org/).
  - Tested on Rubinius, MRI, and JRuby
 
 ## Installation
-Add the gem to your `Gemfile`
-``` ruby
-gem 'jschema'
+
+Add `jschema` to your `Gemfile` and execute `bundle install`.
+
+## Basic usage example
+
+```ruby
+require 'jschema'
+
+# Create a new schema describing user profile data
+schema = JSchema.build(
+  'type' => 'object',
+  'properties' => {
+    'email'    => { 'type' => 'string', 'format' => 'email' },
+    'password' => { 'type' => 'string', 'minLength' => 6 },
+    'sex'      => { 'type' => 'string', 'enum' => ['m', 'f'] }
+  },
+  'required' => ['email', 'password']
+)
+
+# Validate input and return an array of validation errors
+schema.validate 'invalid_data'
+# => ["`invalid_data` must be an object"]
+
+p schema.validate('email' => 'user@example.org', 'password' => 'kielbasa')
+# => []
+
+# Validate input and return boolean value indicating validation result
+schema.valid? 'invalid_data'
+# => false
+
+schema.valid?('email' => 'user@example.org', 'password' => 'kielbasa')
+# => true
 ```
-And then run
-``` sh
-$ bundle install
+
+## More advanced example
+
+The following example shows how you can validate user's input. In this example
+we implement a simple service that allows us to search for comics.
+
+First let's define schema for the search query. It can also be used as
+documentation for our service. We can add `title` and `description` fields for
+each query param.
+
+```javascript
+// comic_search_query.json
+{
+    "title": "Comic search query",
+    "description": "Fetches lists of comics with optional filters",
+    "type": "object",
+    "properties": {
+        "characters": {
+            "description": "Return only comics which feature the specified characters",
+            "type": "array",
+            "items": { "pattern": "^\\d+$" },
+            "minItems": 1
+        },
+        "format": {
+            "description": "Filter by the issue format type (comic or collection)",
+            "type": "string",
+            "enum": [ "comic", "collection" ]
+        },
+        "hasDigitalIssue": {
+            "description": "Include only results which are available digitally",
+            "type": "string",
+            "enum": [ "1", "0" ],
+            "default": "1"
+        },
+        "limit": {
+            "description": "Limit the result set to the specified number of resources",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        }
+    },
+    "required": [ "characters" ]
+}
 ```
 
-## Usage
+Now we can use our query schema in order to validate user's input. Here is
+implementation of the comic search service:
 
-``` ruby
-  require 'jschema'
+```ruby
+# config.ru
+require 'jschema'
+require 'rack'
+require 'json'
 
-  # Create a new schema
-  schema = JSchema.build('type' => 'string')
+class ComicSearch
+  class << self
+    def call(env)
+      request = Rack::Request.new(env)
+      validation_errors = query_schema.validate(request.params)
+      if validation_errors.empty?
+        # Query is valid, request can be processed further
+        Rack::Response.new('Valid query', 200)
+      else
+        # Query is not valid, show validation errors
+        Rack::Response.new(validation_errors, 400)
+      end
+    end
 
-  # Validate input and return an array of validation errors
-  schema.validate 0    # => ["`0` must be a string"]
-  schema.validate 'ok' # => []
+    private
 
-  # Validate input and return boolean value indicating validation result
-  schema.valid? 0    # => false
-  schema.valid? 'ok' # => true
+    def query_schema
+      @schema ||= begin
+        schema_data = JSON.parse File.read('./comic_search_query.json')
+        JSchema.build(schema_data)
+      end
+    end
+  end
+end
+
+run ComicSearch
+# run the service by executing 'rackup'
 ```
 
 ## Contributing
 
 Pull requests are very welcome. Please make sure that your changes
 don't break the tests by running:
-``` sh
+
+```sh
 $ bundle exec rake
 ```
 

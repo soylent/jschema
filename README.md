@@ -40,7 +40,7 @@ schema = JSchema.build(
 schema.validate 'invalid_data'
 # => ["`invalid_data` must be an object"]
 
-p schema.validate('email' => 'user@example.org', 'password' => 'kielbasa')
+schema.validate('email' => 'user@example.org', 'password' => 'kielbasa')
 # => []
 
 # Validate input and return boolean value indicating validation result

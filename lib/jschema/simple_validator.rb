@@ -57,7 +57,7 @@ module JSchema
     end
 
     def number?(value)
-      integer?(value) || value.is_a?(Float) || value.is_a?(BigDecimal)
+      value.is_a?(Numeric)
     end
 
     def non_empty_array?(value, uniqueness_check = true)

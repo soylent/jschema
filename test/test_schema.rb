@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'webmock/minitest'
 require 'jschema'
 
 require_relative 'assert_received'
@@ -34,6 +35,7 @@ class TestSchema < Minitest::Test
   end
 
   def test_schema_uri_when_parent_uri_is_absolute
+    stub_request(:get, 'http://example.com/test').to_return(body: '{}')
     uri = schema_uri('test', 'http://example.com/')
     assert_equal URI('http://example.com/test'), uri
   end
@@ -45,6 +47,7 @@ class TestSchema < Minitest::Test
   end
 
   def test_schema_uri_when_both_parent_and_schema_uri_are_absolute
+    stub_request(:get, 'http://example.com/').to_return(body: '{}')
     schema_id = 'http://example.com/'
     parent_id = 'http://localhost/'
     uri = schema_uri(schema_id, parent_id)
@@ -56,8 +59,9 @@ class TestSchema < Minitest::Test
   end
 
   def test_that_schema_uri_is_normalized
+    stub_request(:get, 'http://example.com/path').to_return(body: '{}')
     uri = schema_uri('etc/../path', 'http://Example.com')
-    assert_equal 'http://example.com/path', uri.to_s
+    assert_equal URI('http://example.com/path'), uri
   end
 
   def test_json_refenrece
@@ -75,6 +79,23 @@ class TestSchema < Minitest::Test
         JSchema::Schema.build
       end
     end
+  end
+
+  # TODO: Make it isolated.
+  def test_schema_caching
+    parent = JSchema::Schema.build
+    sch = { 'type' => 'string' }
+    schema1 = JSchema::Schema.build(sch, parent)
+    schema2 = JSchema::Schema.build(sch, parent)
+    assert_equal schema1.object_id, schema2.object_id
+  end
+
+  # TODO: Make it isolated.
+  def test_that_root_schemas_are_not_cached
+    sch = { 'type' => 'string' }
+    schema1 = JSchema::Schema.build(sch)
+    schema2 = JSchema::Schema.build(sch)
+    refute_equal schema1.object_id, schema2.object_id
   end
 
   # TODO: Make it isolated.

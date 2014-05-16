@@ -1,3 +1,5 @@
+require 'json'
+
 module JSchema
   module JSONReference
     @mutex = Mutex.new
@@ -13,9 +15,15 @@ module JSchema
 
       def dereference(uri, schema)
         schema_key = key(uri, schema)
-        @mutex.synchronize do
+        cached_schema = @mutex.synchronize do
           @schemas[schema_key] if schema_key
-        end || build_external_schema(uri, schema)
+        end
+
+        if cached_schema.nil? && uri.absolute?
+          build_external_schema(uri, schema)
+        else
+          cached_schema
+        end
       end
 
       private
@@ -27,7 +35,7 @@ module JSchema
 
         schema_data = JSON.parse download_schema(uri)
         parent_schema = schema && schema.parent
-        register_schema Schema.new(schema_data, uri, parent_schema)
+        Schema.build(schema_data, parent_schema, uri.to_s)
       rescue JSON::ParserError, Timeout::Error
         raise InvalidSchema, 'Failed to download external schema'
       end

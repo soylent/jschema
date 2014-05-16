@@ -82,7 +82,7 @@ module JSchema
       def properties_schema(field)
         if @properties.is_a?(Hash)
           if (sch = @properties[field])
-            Schema.build(sch, parent, 'properties')
+            Schema.build(sch, parent, "properties/#{field}")
           end
         end
       end

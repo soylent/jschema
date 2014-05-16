@@ -13,9 +13,11 @@ module JSchema
           SchemaRef.new(ref_uri, parent)
         else
           uri = establish_uri(schema, parent, id)
-          jschema = new(schema, uri, parent)
-          register_definitions schema, jschema
-          JSONReference.register_schema jschema
+          parent && JSONReference.dereference(uri, parent) || begin
+            jschema = new(schema, uri, parent)
+            register_definitions schema, jschema
+            JSONReference.register_schema jschema
+          end
         end
       end
 

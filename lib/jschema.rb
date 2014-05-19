@@ -4,6 +4,7 @@ require 'delegate'
 
 require 'jschema/json_reference'
 require 'jschema/schema_ref'
+require 'jschema/schema_uri'
 require 'jschema/schema'
 require 'jschema/simple_validator'
 require 'jschema/validator'

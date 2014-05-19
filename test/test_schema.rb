@@ -26,44 +26,6 @@ class TestSchema < Minitest::Test
     end
   end
 
-  def test_default_schema_uri
-    assert_equal URI('#'), schema_uri
-  end
-
-  def test_schema_uri_when_parent_is_not_specified
-    assert_equal URI('test'), schema_uri('test')
-  end
-
-  def test_schema_uri_when_parent_uri_is_absolute
-    stub_request(:get, 'http://example.com/test').to_return(body: '{}')
-    uri = schema_uri('test', 'http://example.com/')
-    assert_equal URI('http://example.com/test'), uri
-  end
-
-  def test_schema_uri_when_parent_uri_is_relative
-    assert_raises(JSchema::InvalidSchema) do
-      schema_uri('relative/', 'relative/')
-    end
-  end
-
-  def test_schema_uri_when_both_parent_and_schema_uri_are_absolute
-    stub_request(:get, 'http://example.com/').to_return(body: '{}')
-    schema_id = 'http://example.com/'
-    parent_id = 'http://localhost/'
-    uri = schema_uri(schema_id, parent_id)
-    assert_equal URI(schema_id), uri
-  end
-
-  def test_schema_uri_when_ids_are_not_specified
-    assert_equal URI('#/child'), schema_uri(nil, nil, 'child')
-  end
-
-  def test_that_schema_uri_is_normalized
-    stub_request(:get, 'http://example.com/path').to_return(body: '{}')
-    uri = schema_uri('etc/../path', 'http://Example.com')
-    assert_equal URI('http://example.com/path'), uri
-  end
-
   def test_json_refenrece
     schema = Object.new
     JSchema::SchemaRef.stub :new, schema do

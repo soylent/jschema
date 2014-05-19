@@ -12,7 +12,7 @@ module JSchema
           ref_uri = URI(json_reference)
           SchemaRef.new(ref_uri, parent)
         else
-          uri = establish_uri(schema, parent, id)
+          uri = SchemaURI.build(schema, parent, id)
           parent && JSONReference.dereference(uri, parent) || begin
             jschema = new(schema, uri, parent)
             register_definitions schema, jschema
@@ -27,25 +27,6 @@ module JSchema
         version = schema['$schema']
         if version && version != VERSION_ID
           fail InvalidSchema, 'Specified schema version is not supported'
-        end
-      end
-
-      # rubocop:disable MethodLength
-      def establish_uri(schema, parent, id)
-        this_id = URI(schema['id'] || id || '#')
-
-        # RFC 3986, cl. 5.1
-        if parent
-          if parent.uri.absolute?
-            parent.uri.merge(this_id).normalize
-          elsif parent.uri.path.empty?
-            URI('#' + File.join(parent.uri.fragment, id || '')) # FIXME
-          else
-            # RFC 3986, cl. 5.1.4
-            fail InvalidSchema, 'Can not establish a base URI'
-          end
-        else
-          this_id
         end
       end
 

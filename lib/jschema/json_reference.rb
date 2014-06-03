@@ -30,14 +30,14 @@ module JSchema
 
       def build_external_schema(uri, schema)
         unless valid_external_uri?(uri)
-          fail InvalidSchema, 'Invalid URI for external schema'
+          fail InvalidSchema, "Invalid URI for external schema: #{uri}"
         end
 
         schema_data = JSON.parse download_schema(uri)
         parent_schema = schema && schema.parent
         Schema.build(schema_data, parent_schema, uri.to_s)
       rescue JSON::ParserError, Timeout::Error
-        raise InvalidSchema, 'Failed to download external schema'
+        raise InvalidSchema, "Failed to download external schema: #{uri}"
       end
 
       def valid_external_uri?(uri)

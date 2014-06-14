@@ -7,7 +7,10 @@ module JSchema
     end
 
     def __getobj__
-      @schema ||= JSONReference.dereference(@uri, @parent)
+      @schema ||= begin
+        JSONReference.dereference(@uri, @parent) ||
+          Kernel.fail(InvalidSchema, "Failed to dereference schema: #{@uri}")
+      end
     end
   end
 end

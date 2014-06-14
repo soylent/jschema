@@ -8,4 +8,12 @@ class TestSchemaRef < Minitest::Test
       assert_equal JSchema::SchemaRef.new(schema.uri, nil), schema
     end
   end
+
+  def test_that_exception_is_raised_if_reference_is_incorrect
+    JSchema::JSONReference.stub :dereference, nil do
+      assert_raises(JSchema::InvalidSchema) do
+        JSchema::SchemaRef.new('invalid', nil).parent
+      end
+    end
+  end
 end

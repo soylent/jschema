@@ -1,20 +1,29 @@
 module JSchema
   class SchemaURI
-    def self.build(schema, parent_schema, id)
-      this_id = URI(schema['id'] || id || '#')
+    class << self
+      def build(schema, parent_schema, id)
+        # RFC 3986, cl. 5.1
+        if parent_schema
+          if parent_schema.uri.absolute?
+            new_uri_part = schema['id'] ||
+              join_fragments(parent_schema.uri.fragment, id)
 
-      # RFC 3986, cl. 5.1
-      if parent_schema
-        if parent_schema.uri.absolute?
-          parent_schema.uri.merge(this_id).normalize
-        elsif parent_schema.uri.path.empty?
-          URI('#' + File.join(parent_schema.uri.fragment, id || '')) # FIXME
+            parent_schema.uri.merge(new_uri_part).normalize
+          elsif parent_schema.uri.path.empty?
+            join_fragments parent_schema.uri.fragment, id
+          else
+            # RFC 3986, cl. 5.1.4
+            fail InvalidSchema, 'Cannot establish base URI'
+          end
         else
-          # RFC 3986, cl. 5.1.4
-          fail InvalidSchema, 'Can not establish a base URI'
+          URI(schema['id'] || id || '#')
         end
-      else
-        this_id
+      end
+
+      private
+
+      def join_fragments(primary, secondary)
+        URI('#' + File.join(primary || '', secondary || ''))
       end
     end
   end

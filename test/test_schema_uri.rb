@@ -37,6 +37,11 @@ class TestSchemaURI < Minitest::Test
     assert_equal URI('http://example.com/path'), uri
   end
 
+  def test_that_implicit_schema_id_treated_as_uri_fragment
+    uri = schema_uri(nil, 'http://example.com/path#sch', 'sub')
+    assert_equal URI('http://example.com/path#sch/sub'), uri
+  end
+
   private
 
   def schema_uri(schema_id = nil, parent_id = nil, id = nil)

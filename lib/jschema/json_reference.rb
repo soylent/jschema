@@ -7,7 +7,9 @@ module JSchema
 
     class << self
       def register_schema(schema)
-        schema_key = key(schema.uri, schema)
+        parent_schema = schema.uri == URI('#') ? schema : schema.parent
+        schema_key = key(schema.uri, parent_schema)
+
         @mutex.synchronize do
           @schemas[schema_key] = schema
         end
@@ -19,14 +21,28 @@ module JSchema
           @schemas[schema_key] if schema_key
         end
 
-        if cached_schema.nil? && uri.absolute?
-          build_external_schema(uri, schema)
-        else
+        if cached_schema
           cached_schema
+        elsif uri.absolute? && !schema_part?(uri, schema)
+          build_external_schema(uri, schema)
         end
       end
 
       private
+
+      def schema_part?(uri, schema)
+        if schema
+          uri1_base = uri.dup
+          uri1_base.fragment = ''
+
+          uri2_base = schema.uri.dup
+          uri2_base.fragment = ''
+
+          uri1_base == uri2_base
+        else
+          false
+        end
+      end
 
       def build_external_schema(uri, schema)
         unless valid_external_uri?(uri)

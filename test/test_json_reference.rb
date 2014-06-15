@@ -7,9 +7,9 @@ require_relative 'assert_received'
 
 class TestJSONReference < Minitest::Test
   def test_schema_registration_and_dereferencing
-    schema = generate_schema('registered')
+    schema = generate_schema('registered', false)
     JSchema::JSONReference.register_schema schema
-    assert_equal dereference(schema), schema
+    assert_equal schema, dereference(schema)
   end
 
   def test_schema_dereferencing_with_same_uri
@@ -18,8 +18,8 @@ class TestJSONReference < Minitest::Test
     JSchema::JSONReference.register_schema schema1
     JSchema::JSONReference.register_schema schema2
 
-    assert_equal dereference(schema1), schema1
-    assert_equal dereference(schema2), schema2
+    assert_equal schema1, dereference(schema1)
+    assert_equal schema2, dereference(schema2)
   end
 
   def test_dereferencing_external_schema
@@ -66,16 +66,16 @@ class TestJSONReference < Minitest::Test
 
   def dereference_external_schema(uri, response_schema, parent = true)
     stub_request(:get, uri).to_return(body: response_schema)
-    dereference generate_schema(uri), parent
+    dereference generate_schema(uri, parent)
   end
 
-  def dereference(schema, parent = true)
-    parent_schema = parent ? schema : nil
-    JSchema::JSONReference.dereference(schema.uri, parent_schema)
+  def dereference(schema)
+    JSchema::JSONReference.dereference(schema.uri, schema.parent)
   end
 
-  def generate_schema(uri)
-    OpenStruct.new(uri: URI(uri), id: generate_id)
+  def generate_schema(uri, parent = true)
+    parent_schema = generate_schema('#', false) if parent
+    OpenStruct.new(uri: URI(uri), id: generate_id, parent: parent_schema)
   end
 
   def generate_id

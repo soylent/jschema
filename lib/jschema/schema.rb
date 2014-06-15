@@ -12,7 +12,7 @@ module JSchema
           ref_uri = URI(json_reference)
           SchemaRef.new(ref_uri, parent)
         else
-          uri = SchemaURI.build(schema, parent, id)
+          uri = SchemaURI.build(schema['id'], parent, id)
           parent && JSONReference.dereference(uri, parent) || begin
             jschema = new(schema, uri, parent)
             register_definitions schema, jschema

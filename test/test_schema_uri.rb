@@ -46,7 +46,6 @@ class TestSchemaURI < Minitest::Test
 
   def schema_uri(schema_id = nil, parent_id = nil, id = nil)
     parent_schema = JSchema::Schema.build('id' => parent_id) if parent_id || id
-    schema = { 'id' => schema_id }
-    JSchema::SchemaURI.build(schema, parent_schema, id)
+    JSchema::SchemaURI.build(schema_id, parent_schema, id)
   end
 end

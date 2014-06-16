@@ -7,7 +7,7 @@ require_relative 'assert_received'
 
 class TestJSONReference < Minitest::Test
   def test_schema_registration_and_dereferencing
-    schema = generate_schema('registered', false)
+    schema = generate_schema('registered')
     JSchema::JSONReference.register_schema schema
     assert_equal schema, dereference(schema)
   end
@@ -60,6 +60,28 @@ class TestJSONReference < Minitest::Test
     assert_raises(JSchema::InvalidSchema) do
       dereference_external_schema 'ftp://example.com/', '{}'
     end
+  end
+
+  def test_dereferencing_within_schema_with_non_default_uri
+    schema = generate_schema('http://example.com/', false)
+    JSchema::JSONReference.register_schema schema
+    assert_equal schema, JSchema::JSONReference.dereference(URI('#'), schema)
+  end
+
+  def test_dereferencing_root_schema
+    schema1 = generate_schema('#', false)
+    schema2 = generate_schema('http://example.com/', false)
+    JSchema::JSONReference.register_schema schema1
+    JSchema::JSONReference.register_schema schema2
+
+    assert_equal schema2,
+      JSchema::JSONReference.dereference(URI('#'), schema2)
+
+    assert_equal schema2,
+      JSchema::JSONReference.dereference(URI('http://example.com/#'), schema2)
+
+    assert_equal schema2,
+      JSchema::JSONReference.dereference(URI('http://example.com/'), schema2)
   end
 
   private

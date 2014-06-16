@@ -7,8 +7,7 @@ module JSchema
 
     class << self
       def register_schema(schema)
-        parent_schema = schema.uri == URI('#') ? schema : schema.parent
-        schema_key = key(schema.uri, parent_schema)
+        schema_key = key(schema.uri, schema)
 
         @mutex.synchronize do
           @schemas[schema_key] = schema
@@ -16,7 +15,7 @@ module JSchema
       end
 
       def dereference(uri, schema)
-        schema_key = key(uri, schema)
+        schema_key = key(expand_uri(uri, schema), schema)
         cached_schema = @mutex.synchronize do
           @schemas[schema_key] if schema_key
         end
@@ -29,6 +28,16 @@ module JSchema
       end
 
       private
+
+      def expand_uri(uri, schema)
+        if schema && schema.uri.absolute?
+          schema.uri.merge(uri).normalize.tap do |expanded_uri|
+            expanded_uri.fragment = nil if expanded_uri.fragment == ''
+          end
+        else
+          uri
+        end
+      end
 
       def schema_part?(uri, schema)
         if schema

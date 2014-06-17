@@ -78,7 +78,7 @@ module JSchema
     end
 
     def valid_schema?(schema, id)
-      schema.is_a?(Hash) && !!Schema.build(schema, parent, id)
+      schema.is_a?(Hash) && Schema.build(schema, parent, id)
     rescue InvalidSchema
       false
     end

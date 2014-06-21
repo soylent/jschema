@@ -7,7 +7,7 @@ module JSchema
 
     class << self
       def register_schema(schema)
-        schema_key = key(schema.uri, schema)
+        schema_key = key(normalize(schema.uri), schema)
 
         @mutex.synchronize do
           @schemas[schema_key] = schema
@@ -31,12 +31,16 @@ module JSchema
 
       def expand_uri(uri, schema)
         if schema && schema.uri.absolute?
-          schema.uri.merge(uri).normalize.tap do |expanded_uri|
-            expanded_uri.fragment = nil if expanded_uri.fragment == ''
-          end
+          normalize schema.uri.merge(uri)
         else
-          uri
+          normalize uri
         end
+      end
+
+      def normalize(uri)
+        normalized = uri.dup
+        normalized.fragment = nil if normalized.fragment == ''
+        normalized.normalize
       end
 
       def schema_part?(uri, schema)

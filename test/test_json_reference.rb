@@ -84,6 +84,14 @@ class TestJSONReference < Minitest::Test
       JSchema::JSONReference.dereference(URI('http://example.com/'), schema2)
   end
 
+  def test_dereferencing_schema_by_slightly_different_uri
+    schema = generate_schema('http://example.com/#', false)
+    JSchema::JSONReference.register_schema schema
+
+    assert_equal schema,
+      JSchema::JSONReference.dereference(URI('http://example.com/'), schema)
+  end
+
   private
 
   def dereference_external_schema(uri, response_schema, parent = true)

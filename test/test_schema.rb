@@ -62,10 +62,10 @@ class TestSchema < Minitest::Test
 
   # TODO: Make it isolated.
   def test_definitions
-    schema_def_uri = '#/definitions/schema1'
+    schema_def_uri = URI('#/definitions/schema1')
     schema = JSchema::Schema.build('definitions' => { 'schema1' => {} })
     definition = JSchema::SchemaRef.new(schema_def_uri, schema)
-    assert_equal URI(schema_def_uri), definition.uri
+    assert_equal schema_def_uri, definition.uri
   end
 
   def test_that_exception_is_raised_when_schema_version_is_not_supported

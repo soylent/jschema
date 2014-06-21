@@ -62,6 +62,14 @@ class TestFormat < Minitest::Test
     refute validator('uri').valid?('://')
   end
 
+  def test_passing_validation_by_regex
+    assert validator('regex').valid?('\d+')
+  end
+
+  def test_failing_validation_by_regex
+    refute validator('regex').valid?('**')
+  end
+
   private
 
   def validator_class

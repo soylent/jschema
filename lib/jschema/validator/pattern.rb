@@ -14,7 +14,7 @@ module JSchema
       def validate_args(pattern)
         Regexp.new(pattern)
         true
-      rescue TypeError, PrimitiveFailure
+      rescue TypeError, PrimitiveFailure, RegexpError
         invalid_schema 'pattern', pattern
       end
 

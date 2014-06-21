@@ -9,7 +9,7 @@ module JSchema
 
       def validate_args(format)
         allowed_formats =
-          ['date-time', 'email', 'hostname', 'ipv4', 'ipv6', 'uri']
+          ['date-time', 'email', 'hostname', 'ipv4', 'ipv6', 'uri', 'regex']
 
         if allowed_formats.include?(format)
           true
@@ -68,6 +68,13 @@ module JSchema
       def uri(instance)
         URI.parse instance
       rescue URI::InvalidURIError
+        false
+      end
+
+      def regex(instance)
+        Regexp.new(instance)
+        true
+      rescue TypeError, RegexpError
         false
       end
     end

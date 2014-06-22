@@ -34,6 +34,20 @@ class TestSchema < Minitest::Test
     end
   end
 
+  def test_that_tilda_is_unescaped
+    expected_ref_uri = URI('#/definitions/sch~')
+    assert_received JSchema::SchemaRef, :new, [expected_ref_uri, nil] do
+      JSchema::Schema.build('$ref' => '#/definitions/sch~0')
+    end
+  end
+
+  def test_that_forward_slash_is_unescaped
+    expected_ref_uri = URI('#/definitions/sch/sch')
+    assert_received JSchema::SchemaRef, :new, [expected_ref_uri, nil] do
+      JSchema::Schema.build('$ref' => '#/definitions/sch~1sch')
+    end
+  end
+
   def test_storing_schema_in_registry
     sch = Object.new
     JSchema::Schema.stub :new, sch do

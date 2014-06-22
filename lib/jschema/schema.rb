@@ -9,8 +9,8 @@ module JSchema
         check_schema_version schema
 
         if (json_reference = schema['$ref'])
-          ref_uri = URI(json_reference)
-          SchemaRef.new(ref_uri, parent)
+          unescaped_ref = json_reference.gsub(/~1|~0/, '~1' => '/', '~0' => '~')
+          SchemaRef.new(URI(unescaped_ref), parent)
         else
           uri = SchemaURI.build(schema['id'], parent, id)
           parent && JSONReference.dereference(uri, parent) || begin

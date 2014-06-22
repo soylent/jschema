@@ -42,6 +42,11 @@ class TestSchemaURI < Minitest::Test
     assert_equal URI('http://example.com/path#sch/sub'), uri
   end
 
+  def test_escaping
+    uri = schema_uri(nil, '#/definitions', 'schema%')
+    assert_equal URI('#/definitions/schema%25'), uri
+  end
+
   private
 
   def schema_uri(schema_id = nil, parent_id = nil, id = nil)

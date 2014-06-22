@@ -17,14 +17,20 @@ module JSchema
             fail InvalidSchema, 'Cannot establish base URI'
           end
         else
-          URI(schema_id || id || '#')
+          uri(schema_id || id || '#')
         end
       end
 
       private
 
       def join_fragments(primary, secondary)
-        URI('#' + File.join(primary || '', secondary || ''))
+        uri('#' + File.join(primary || '', secondary || ''))
+      end
+
+      def uri(uri_string)
+        # NOTE: We need to escape % because URI class does not allow such
+        # characters within URI fragment (which is wrong).
+        URI(URI.escape(uri_string, '%'))
       end
     end
   end

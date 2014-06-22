@@ -4,5 +4,5 @@ rvm:
   - ruby-2.0.0
   - ruby-head
   - jruby
-  - rbx
+  - rbx-2
 before_install: bundle update --quiet

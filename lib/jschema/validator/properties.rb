@@ -36,8 +36,20 @@ module JSchema
       end
 
       def post_initialize(properties, pattern_properties, additional_properties)
-        @properties = properties
-        @additional_properties = additional_properties
+        @properties =
+          if properties.is_a?(Hash)
+            properties.each_with_object({}) do |(field, sch), res|
+              res[field] = Schema.build(sch, parent, "properties/#{field}")
+            end
+          end
+
+        @additional_properties =
+          if additional_properties.is_a?(Hash)
+            Schema.build(additional_properties, parent, 'additionalProperties')
+          else
+            additional_properties
+          end
+
         @pattern_properties = pattern_properties
       end
 
@@ -80,16 +92,12 @@ module JSchema
       end
 
       def properties_schema(field)
-        if @properties.is_a?(Hash)
-          if (sch = @properties[field])
-            Schema.build(sch, parent, "properties/#{field}")
-          end
-        end
+        @properties[field] if @properties.is_a?(Hash)
       end
 
       def additional_properties_schema
-        if @additional_properties.is_a?(Hash)
-          Schema.build(@additional_properties, parent, 'additionalProperties')
+        if @additional_properties.respond_to?(:validate)
+          @additional_properties 
         end
       end
 
@@ -98,7 +106,7 @@ module JSchema
         if @pattern_properties.is_a?(Hash)
           @pattern_properties.each do |pattern, sch|
             if field.match(pattern)
-              schemas << Schema.build(sch, parent, 'patternProperties')
+              schemas << Schema.build(sch, parent, "patternProperties/#{field}")
             end
           end
         end

@@ -82,6 +82,12 @@ class TestSimpleValidator < Minitest::Test
     end
   end
 
+  def test_applicable_types_for_descendants
+    stub_validator [Hash], false do |vdr|
+      refute vdr.valid?(Class.new(Hash).new)
+    end
+  end
+
   private
 
   def stub_validator(applicable_types, valid)

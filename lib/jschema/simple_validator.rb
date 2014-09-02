@@ -28,7 +28,7 @@ module JSchema
     end
 
     def validate(instance)
-      if !applicable_types || applicable_types.include?(instance.class)
+      if !applicable_types || is_type_applicable?(instance.class)
         validate_instance(instance)
       end
     end
@@ -81,6 +81,10 @@ module JSchema
       schema.is_a?(Hash) && Schema.build(schema, parent, id)
     rescue InvalidSchema
       false
+    end
+
+    def is_type_applicable?(type)
+      applicable_types.any? { |t| type.ancestors.include? t }
     end
   end
 end

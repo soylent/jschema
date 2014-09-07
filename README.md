@@ -4,9 +4,9 @@ Describe and validate your JSON data using JSchema – an implementation of JSON
 schema v4. For more information on JSON schema please refer to the official
 documentation – [JSON Schema Documentation](http://json-schema.org/).
 
-[![Build Status](https://travis-ci.org/soylent/jschema.png?branch=master)](https://travis-ci.org/Soylent/jschema)
-[![Coverage Status](https://coveralls.io/repos/soylent/jschema/badge.png?branch=master)](https://coveralls.io/r/Soylent/jschema?branch=master)
-[![Code Climate](https://codeclimate.com/github/soylent/jschema.png)](https://codeclimate.com/github/Soylent/jschema)
+[![Build Status](https://travis-ci.org/soylent/jschema.png?branch=master)](https://travis-ci.org/soylent/jschema)
+[![Coverage Status](https://coveralls.io/repos/soylent/jschema/badge.png?branch=master)](https://coveralls.io/r/soylent/jschema?branch=master)
+[![Code Climate](https://codeclimate.com/github/soylent/jschema.png)](https://codeclimate.com/github/soylent/jschema)
 
 ## Features
 

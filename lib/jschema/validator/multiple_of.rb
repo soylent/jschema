@@ -26,7 +26,7 @@ module JSchema
       end
 
       def applicable_types
-        [Fixnum, Bignum, Float, BigDecimal]
+        [Numeric]
       end
     end
   end

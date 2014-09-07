@@ -82,7 +82,7 @@ class TestSimpleValidator < Minitest::Test
     end
   end
 
-  def test_failing_validation_when_instance_is_descendant_of_applicable_types
+  def test_failing_validation_when_instance_is_descendant_of_applicable_type
     stub_validator Hash, false do |vdr|
       descendant_type = Class.new(Hash)
       refute vdr.valid?(descendant_type.new)

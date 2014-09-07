@@ -20,7 +20,7 @@ module JSchema
         end
       end
 
-      def applicable_types
+      def applicable_type
         Array
       end
     end

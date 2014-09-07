@@ -18,11 +18,11 @@ module JSchema
       end
 
       def validate_instance(instance)
-        @required.each do |required_property|
-          unless instance.key?(required_property)
-            return "#{instance} must have property `#{required_property}`"
-          end
-        end and nil
+        missing_keys = @required - instance.keys
+        unless missing_keys.empty?
+          keys = missing_keys.map(&:inspect).join(', ')
+          "#{instance} must contain #{keys}"
+        end
       end
 
       def valid_required?(required)

@@ -66,7 +66,7 @@ module JSchema
       end
 
       def uri(instance)
-        URI.parse instance
+        URI.parse URI.encode(instance)
       rescue URI::InvalidURIError
         false
       end

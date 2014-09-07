@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'minitest/autorun'
 require_relative 'assertions'
 
@@ -56,6 +57,10 @@ class TestFormat < Minitest::Test
 
   def test_passing_validation_by_uri_format
     assert validator('uri').valid?('http://example.com/')
+  end
+
+  def test_passing_validation_of_non_ascii_uri
+    assert validator('uri').valid?('http://☃.net/☃')
   end
 
   def test_failing_validation_by_uri_format

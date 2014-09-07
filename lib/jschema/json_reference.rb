@@ -65,7 +65,7 @@ module JSchema
         schema_data = JSON.parse download_schema(uri)
         parent_schema = schema && schema.parent
         Schema.build(schema_data, parent_schema, uri.to_s)
-      rescue JSON::ParserError, Timeout::Error
+      rescue JSON::ParserError, Timeout::Error, Errno::ECONNREFUSED
         raise InvalidSchema, "Failed to download external schema: #{uri}"
       end
 

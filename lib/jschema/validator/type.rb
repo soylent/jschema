@@ -15,9 +15,9 @@ module JSchema
 
       def post_initialize(type)
         @json_types = Array(type)
-        @ruby_classes = @json_types.map do |json_type|
+        @ruby_classes = @json_types.flat_map do |json_type|
           json_type_to_ruby_class(json_type)
-        end.flatten.compact
+        end
       end
 
       def validate_instance(instance)
@@ -31,10 +31,10 @@ module JSchema
         when 'object'  then Hash
         when 'null'    then NilClass
         when 'string'  then String
-        when 'integer' then [Fixnum, Bignum]
+        when 'integer' then Integer
         when 'array'   then Array
         when 'boolean' then [TrueClass, FalseClass]
-        when 'number'  then [Fixnum, Float, BigDecimal, Bignum]
+        when 'number'  then Numeric
         else invalid_schema('type', json_type)
         end
       end

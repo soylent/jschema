@@ -15,13 +15,13 @@ module JSchema
 
       def post_initialize(type)
         @json_types = Array(type)
-        @ruby_classes = @json_types.flat_map do |json_type|
+        @ruby_classes = @json_types.map do |json_type|
           json_type_to_ruby_class(json_type)
         end
       end
 
       def validate_instance(instance)
-        unless @ruby_classes.one? { |type| instance.is_a?(type) }
+        unless @ruby_classes.one? { |type| type === instance }
           error_message(instance)
         end
       end
@@ -33,7 +33,7 @@ module JSchema
         when 'string'  then String
         when 'integer' then Integer
         when 'array'   then Array
-        when 'boolean' then [TrueClass, FalseClass]
+        when 'boolean' then Boolean
         when 'number'  then Numeric
         else invalid_schema('type', json_type)
         end
@@ -51,6 +51,14 @@ module JSchema
           end
 
         "#{instance.inspect} must be a #{types}"
+      end
+
+      module Boolean
+        class << self
+          def ===(other)
+            other == true || other == false || super
+          end
+        end
       end
     end
   end

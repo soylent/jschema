@@ -23,6 +23,7 @@ task :spec, :test_files do |t, args|
 
   def spec_error(test_file, specs, error)
     puts "[E] #{test_file}: #{specs['description']} - #{error}"
+    puts error.backtrace.take(10)
     [0, 0, 1]
   end
 

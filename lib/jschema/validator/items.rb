@@ -71,8 +71,8 @@ module JSchema
         end
       end
 
-      def applicable_types
-        [Array]
+      def applicable_type
+        Array
       end
     end
   end

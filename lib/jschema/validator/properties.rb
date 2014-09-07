@@ -53,8 +53,8 @@ module JSchema
         @pattern_properties = pattern_properties
       end
 
-      def applicable_types
-        [Hash]
+      def applicable_type
+        Hash
       end
 
       def validate_instance(instance)

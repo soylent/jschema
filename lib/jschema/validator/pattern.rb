@@ -28,8 +28,8 @@ module JSchema
         end
       end
 
-      def applicable_types
-        [String]
+      def applicable_type
+        String
       end
     end
   end

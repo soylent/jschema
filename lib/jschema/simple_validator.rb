@@ -28,7 +28,7 @@ module JSchema
     end
 
     def validate(instance)
-      if !applicable_types || applicable_types.any? { |type| type === instance }
+      if !applicable_type || instance.is_a?(applicable_type)
         validate_instance(instance)
       end
     end
@@ -36,7 +36,7 @@ module JSchema
     private
 
     # Hook method
-    def applicable_types; end
+    def applicable_type; end
 
     def invalid_schema(keyword, value)
       fail InvalidSchema, "Invalid `#{keyword}` value: #{value.inspect}"

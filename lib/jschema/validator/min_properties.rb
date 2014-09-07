@@ -17,8 +17,8 @@ module JSchema
         @min_properties = min_properties
       end
 
-      def applicable_types
-        [Hash]
+      def applicable_type
+        Hash
       end
 
       def validate_instance(instance)

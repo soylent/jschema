@@ -23,8 +23,8 @@ module JSchema
         end
       end
 
-      def applicable_types
-        [Numeric]
+      def applicable_type
+        Numeric
       end
     end
   end

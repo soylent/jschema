@@ -23,8 +23,8 @@ class TestSimpleValidator < Minitest::Test
       def validate_instance(param)
       end
 
-      def applicable_types
-        [String]
+      def applicable_type
+        String
       end
     end
   end
@@ -71,19 +71,19 @@ class TestSimpleValidator < Minitest::Test
   end
 
   def test_that_validation_always_passes_if_validator_is_not_applicable
-    stub_validator [Fixnum], false do |vdr|
+    stub_validator Fixnum, false do |vdr|
       assert vdr.valid?('instance')
     end
   end
 
   def test_failing_validation_when_validator_is_applicable
-    stub_validator [Fixnum], false do |vdr|
+    stub_validator Fixnum, false do |vdr|
       refute vdr.valid?(0)
     end
   end
 
   def test_failing_validation_when_instance_is_descendant_of_applicable_types
-    stub_validator [Hash], false do |vdr|
+    stub_validator Hash, false do |vdr|
       descendant_type = Class.new(Hash)
       refute vdr.valid?(descendant_type.new)
     end
@@ -91,10 +91,10 @@ class TestSimpleValidator < Minitest::Test
 
   private
 
-  def stub_validator(applicable_types, valid)
+  def stub_validator(applicable_type, valid)
     validator_example = validator 'test'
     validation_result = valid ? nil : 'error'
-    validator_example.stub :applicable_types, applicable_types do
+    validator_example.stub :applicable_type, applicable_type do
       validator_example.stub :validate_instance, validation_result do
         yield validator_example
       end

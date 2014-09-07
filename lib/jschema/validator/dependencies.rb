@@ -55,8 +55,8 @@ module JSchema
         end
       end
 
-      def applicable_types
-        [Hash]
+      def applicable_type
+        Hash
       end
     end
   end

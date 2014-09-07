@@ -6,8 +6,8 @@ module JSchema
       @length_limit = length_limit
     end
 
-    def applicable_types
-      [String]
+    def applicable_type
+      String
     end
 
     def valid_length_limit?(length_limit, min_length_limit)

@@ -6,6 +6,12 @@ task :spec, :test_files do |t, args|
   args.with_defaults(test_files: 'JSON-Schema-Test-Suite/tests/draft4/*.json')
   test_files = Dir[args[:test_files]]
 
+  if test_files.empty?
+    abort "Could not find test files.\n" \
+          "You need to copy json schema test suit first:\n" \
+          "git clone git@github.com:json-schema/JSON-Schema-Test-Suite.git"
+  end
+
   def spec_passed
     [1, 0, 0]
   end

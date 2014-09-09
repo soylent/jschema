@@ -28,15 +28,18 @@ namespace :perf do
     validation_benchmark = validation.total.round(3)
 
     already_recorded = false
-    CSV.foreach('./performance_data.csv') do |row|
-      if row.first == hash
-        already_recorded = true
-        break
+    performance_data_path = './performance_data.csv'
+    if File.exists?(performance_data_path)
+      CSV.foreach(performance_data_path) do |row|
+        if row.first == hash
+          already_recorded = true
+          break
+        end
       end
     end
 
     unless already_recorded
-      CSV.open('./performance_data.csv', 'a') do |csv|
+      CSV.open(performance_data_path, 'a') do |csv|
         csv << [hash, time, parsing_benchmark, validation_benchmark]
       end
     end

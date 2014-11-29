@@ -6,13 +6,13 @@ documentation – [JSON Schema Documentation](http://json-schema.org/).
 
 [![Build Status](https://travis-ci.org/soylent/jschema.png?branch=master)](https://travis-ci.org/soylent/jschema)
 [![Coverage Status](https://coveralls.io/repos/soylent/jschema/badge.png?branch=master)](https://coveralls.io/r/soylent/jschema?branch=master)
-[![Code Climate](https://codeclimate.com/github/soylent/jschema.png)](https://codeclimate.com/github/soylent/jschema)
+[![Code Climate](https://codeclimate.com/github/Soylent/jschema.png)](https://codeclimate.com/github/Soylent/jschema)
 
 ## Features
 
  - Implements JSON Schema draft 4 strictly according to the specification
  - Small, efficient and thread-safe
- - It uses only standard ruby libs
+ - It does not have any dependencies
  - Clean and extensible code
  - Tested on Rubinius, MRI, and JRuby
 
@@ -108,7 +108,10 @@ class ComicSearch
   class << self
     def call(env)
       request = Rack::Request.new(env)
+
+      # Validate request params using JSON schema
       validation_errors = query_schema.validate(request.params)
+
       if validation_errors.empty?
         # Query is valid, request can be processed further
         Rack::Response.new('Valid query', 200)
@@ -121,7 +124,9 @@ class ComicSearch
     private
 
     def query_schema
-      @schema ||= begin
+      # Create a new instance of JSchema unless it has
+      # already been created.
+      Thread.current[:schema] ||= begin
         schema_data = JSON.parse File.read('./comic_search_query.json')
         JSchema.build(schema_data)
       end

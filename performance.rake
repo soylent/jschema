@@ -28,7 +28,7 @@ namespace :perf do
     validation_benchmark = validation.total.round(3)
 
     already_recorded = false
-    performance_data_path = './performance_data.csv'
+    performance_data_path = File.expand_path('performance_data.csv', __dir__)
     if File.exists?(performance_data_path)
       CSV.foreach(performance_data_path) do |row|
         if row.first == hash
@@ -44,7 +44,7 @@ namespace :perf do
       end
     end
 
-    sh './performance_plot.sh'
+    sh './performance_plot'
   end
 
   desc 'Profile jschema initialization code'

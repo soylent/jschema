@@ -3,7 +3,7 @@ require 'json'
 require 'jschema'
 
 load 'json_schema_tests.rake'
-load 'performance.rake'
+load 'performance/performance.rake'
 
 Rake::TestTask.new do |test|
   test.pattern = 'test/**/test_*.rb'

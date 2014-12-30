@@ -12,6 +12,7 @@ namespace :perf do
       JSON.parse File.read('test/fixtures/json_schema2.json')
   end
 
+  # TODO: Move into a module and refactor
   desc 'Measure jschema parsing and validation time'
   task :measure do
     parsing = Benchmark.measure do
@@ -44,7 +45,9 @@ namespace :perf do
       end
     end
 
-    sh './performance_plot'
+    performance_plot = File.expand_path('performance_plot', __dir__)
+    plot_args = "performance_data='#{performance_data_path}'"
+    sh 'gnuplot', '-e', plot_args, performance_plot
   end
 
   desc 'Profile jschema initialization code'

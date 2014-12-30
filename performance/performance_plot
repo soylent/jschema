@@ -14,5 +14,7 @@ set ylabel "Benchmark (s)"
 set grid
 set multiplot
 
-plot "./performance_data.csv" using 2:3 title "Parsing" with lines, \
-     "./performance_data.csv" using 2:4 title "Validation" with lines
+if (!exists("performance_data")) exit error "Please specify perfomance_data path"
+
+plot performance_data using 2:3 title "Parsing" with lines, \
+     performance_data using 2:4 title "Validation" with lines

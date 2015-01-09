@@ -1,7 +1,12 @@
 language: ruby
 rvm:
-  - ruby-1.9.3
-  - ruby-2.0.0
-  - ruby-head
+  - 2.0
+  - 2.1
+  - 2.2
+  - rbx-2
   - jruby
+matrix:
+  allow_failures:
+    - rvm: rbx-2
+    - rvm: jruby
 before_install: bundle update --quiet

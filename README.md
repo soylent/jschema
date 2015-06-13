@@ -127,7 +127,7 @@ class ComicSearch
       # Create a new instance of JSchema unless it has
       # already been created.
       Thread.current[:schema] ||= begin
-        schema_data = JSON.parse File.read('./comic_search_query.json')
+        schema_data = JSON.parse File.read('comic_search_query.json')
         JSchema.build(schema_data)
       end
     end
@@ -135,17 +135,40 @@ class ComicSearch
 end
 
 run ComicSearch
-# run the service by executing 'rackup'
 ```
+
+Run the service:
+
+      $ rackup -D
+
+Make a valid request:
+
+      $ curl -v --globoff ":9292/?characters[]=1"
+      ...
+      < HTTP/1.1 200 OK
+
+Make a bad request:
+
+      $ curl -v --globoff ":9292/?characters[]=first"
+      ...
+      < HTTP/1.1 400 Bad Request
+      < first must match pattern "^\\d+$"
 
 ## Contributing
 
-Pull requests are very welcome. Please make sure that your changes
-don't break the tests by running:
+Pull requests are very welcome!
 
-```sh
-$ bundle exec rake
-```
+* Please make sure that your changes don't break the tests by running:
+
+      $ bundle exec rake
+
+* Run a single test suite:
+
+      $ ruby -Ilib test/test_suite.rb
+
+* Run a single test:
+
+      $ ruby -Ilib test/test_suite.rb -n /test_method_name/
 
 ## License
 

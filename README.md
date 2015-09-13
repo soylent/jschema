@@ -4,15 +4,15 @@ Describe and validate your JSON data using JSchema – an implementation of JSON
 schema v4. For more information on JSON schema please refer to the official
 documentation – [JSON Schema Documentation](http://json-schema.org/).
 
-[![Build Status](https://travis-ci.org/soylent/jschema.png?branch=master)](https://travis-ci.org/soylent/jschema)
-[![Coverage Status](https://coveralls.io/repos/soylent/jschema/badge.png?branch=master)](https://coveralls.io/r/soylent/jschema?branch=master)
-[![Code Climate](https://codeclimate.com/github/Soylent/jschema.png)](https://codeclimate.com/github/Soylent/jschema)
+[![Build Status](https://travis-ci.org/soylent/jschema.svg?branch=master)](https://travis-ci.org/soylent/jschema)
+[![Coverage Status](https://coveralls.io/repos/soylent/jschema/badge.svg?branch=master&service=github)](https://coveralls.io/github/soylent/jschema?branch=master)
+[![Code Climate](https://codeclimate.com/github/Soylent/jschema/badges/gpa.svg)](https://codeclimate.com/github/Soylent/jschema)
 
 ## Features
 
  - Implements JSON Schema draft 4 strictly according to the specification
  - Small, efficient and thread-safe
- - It does not have any dependencies
+ - No dependencies
  - Clean and extensible code
  - Tested on Rubinius, MRI, and JRuby
 
@@ -139,20 +139,20 @@ run ComicSearch
 
 Run the service:
 
-      $ rackup -D
+    $ rackup -D
 
 Make a valid request:
 
-      $ curl -v --globoff ":9292/?characters[]=1"
-      ...
-      < HTTP/1.1 200 OK
+    $ curl -v --globoff ":9292/?characters[]=1"
+    ...
+    < HTTP/1.1 200 OK
 
 Make a bad request:
 
-      $ curl -v --globoff ":9292/?characters[]=first"
-      ...
-      < HTTP/1.1 400 Bad Request
-      < first must match pattern "^\\d+$"
+    $ curl -v --globoff ":9292/?characters[]=first"
+    ...
+    < HTTP/1.1 400 Bad Request
+    < first must match pattern "^\\d+$"
 
 ## Contributing
 

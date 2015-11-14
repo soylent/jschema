@@ -1,3 +1,5 @@
+require 'webrick/httputils'
+
 module JSchema
   class SchemaURI
     class << self
@@ -29,8 +31,10 @@ module JSchema
 
       def uri(uri_string)
         # NOTE: We need to escape % because URI class does not allow such
-        # characters within URI fragment (which is wrong).
-        URI(URI.escape(uri_string, '%'))
+        # characters within URI fragment (which is wrong). Originally I used
+        # URI.escape(str, '%'), but this method has become obsolete.
+        escaped_uri = WEBrick::HTTPUtils._escape(uri_string, /([%])/)
+        URI(escaped_uri)
       end
     end
   end

@@ -1,5 +1,6 @@
 require 'date'
 require 'ipaddr'
+require 'webrick/httputils'
 
 module JSchema
   module Validator
@@ -67,7 +68,9 @@ module JSchema
       end
 
       def uri(instance)
-        URI.parse URI.encode(instance)
+        # NOTE: Since URI.escape is obsolete I had to use
+        # WEBrick::HTTPUtils.escape
+        URI.parse WEBrick::HTTPUtils.escape(instance)
       rescue URI::InvalidURIError
         false
       end

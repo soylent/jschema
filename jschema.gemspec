@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'jschema'
-  s.version     = '0.1.1'
+  s.version     = '0.1.2'
   s.summary     = 'JSON Schema implementation'
   s.description = 'Implementation of JSON Schema Draft 4'
   s.license     = 'MIT'

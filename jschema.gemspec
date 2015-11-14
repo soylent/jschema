@@ -10,8 +10,6 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.3'
 
-  s.files       = Dir['lib/**/*.rb']
-  s.test_files  = Dir['test/**/*.rb']
-
+  s.files        = Dir['lib/**/*.rb']
   s.require_path = 'lib'
 end

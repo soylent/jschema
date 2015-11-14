@@ -1,4 +1,6 @@
 require 'rake/testtask'
+require 'rubygems/package_task'
+
 require 'json'
 require 'jschema'
 
@@ -8,6 +10,11 @@ load 'performance/performance.rake'
 Rake::TestTask.new do |test|
   test.pattern = 'test/**/test_*.rb'
   test.warning = true
+end
+
+# Define gem packaging task
+gemspec = Gem::Specification.load('jschema.gemspec')
+Gem::PackageTask.new(gemspec) do |_pkg|
 end
 
 desc 'CI tasks'

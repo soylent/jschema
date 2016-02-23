@@ -97,6 +97,13 @@ class TestSchema < Minitest::Test
     assert_instance_of JSchema::Schema, JSchema.build
   end
 
+  def test_fragment
+    sch = { "definitions" => { "schema1" => { "type" => "string" } } }
+    schema = JSchema.build(sch)
+    fragment = schema.fragment("#/definitions/schema1")
+    assert_equal "#/definitions/schema1", fragment.to_s
+  end
+
   private
 
   def stub_validators(ret_val)

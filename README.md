@@ -154,6 +154,30 @@ Make a bad request:
     < HTTP/1.1 400 Bad Request
     < first must match pattern "^\\d+$"
 
+## Fragments
+
+You can validate against part of a schema by extracting it into a new schema
+object with `Schema#fragment`:
+
+```ruby
+schema = JSchema.build(
+  'type' => 'object',
+  'properties' => {
+    'email': { '$ref' => '#/definitions/email' }
+  },
+  'definitions' => {
+    'email' => { 'type' => 'string', 'format' => 'email' }
+  })
+
+email_schema = schema.fragment('#/definitions/email')
+email_schema.valid?('valid@example.com')
+# => true
+
+email_schema.valid?('invalidexample.com')
+# => false
+```
+
+
 ## Contributing
 
 Pull requests are very welcome!

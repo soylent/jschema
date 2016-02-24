@@ -52,6 +52,10 @@ module JSchema
       end.compact
     end
 
+    def fragment(path)
+      JSchema::JSONReference.dereference(URI.parse(path), self)
+    end
+
     def to_s
       uri.to_s
     end

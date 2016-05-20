@@ -42,6 +42,12 @@ module JSchema
 
     attr_reader :uri, :parent
 
+    def initialize(schema, uri, parent)
+      @uri = uri
+      @parent = parent
+      @validators = Validator.build(schema, self)
+    end
+
     def valid?(instance)
       validate(instance).empty?
     end
@@ -58,14 +64,6 @@ module JSchema
 
     def to_s
       uri.to_s
-    end
-
-    private
-
-    def initialize(schema, uri, parent)
-      @uri = uri
-      @parent = parent
-      @validators = Validator.build(schema, self)
     end
   end
 end

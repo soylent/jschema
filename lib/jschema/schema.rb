@@ -45,7 +45,12 @@ module JSchema
     def initialize(schema, uri, parent)
       @uri = uri
       @parent = parent
+      @schema = schema
       @validators = Validator.build(schema, self)
+    end
+
+    def [](key)
+      @schema[key]
     end
 
     def valid?(instance)

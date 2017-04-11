@@ -4,3 +4,4 @@ pkg/
 tags
 Gemfile.lock
 JSON-Schema-Test-Suite/
+test/reports/

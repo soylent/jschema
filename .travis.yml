@@ -5,11 +5,14 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
-  - 2.3.0
-  - rbx-2
+  - 2.3.4
+  - 2.4.1
+  - rbx-2.5.8
+  - rbx-3
   - jruby
 matrix:
   allow_failures:
-    - rvm: rbx-2
+    - rvm: rbx-2.5.8
+    - rvm: rbx-3
     - rvm: jruby
 before_install: bundle update --quiet

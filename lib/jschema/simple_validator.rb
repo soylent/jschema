@@ -49,7 +49,7 @@ module JSchema
     end
 
     def integer?(value)
-      value.is_a?(Fixnum) || value.is_a?(Bignum)
+      value.is_a?(Integer)
     end
 
     def greater_or_equal_to?(value, limit)

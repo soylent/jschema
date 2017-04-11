@@ -1,4 +1,5 @@
 ## [Unreleased]
+- Adds compatibility with Ruby 2.4 (@kenaniah)
 
 ## [0.2.0] - 2016-02-24
 ### Added

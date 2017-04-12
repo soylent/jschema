@@ -49,10 +49,6 @@ module JSchema
       @validators = Validator.build(schema, self)
     end
 
-    def [](key)
-      @schema[key]
-    end
-
     def valid?(instance)
       validate(instance).empty?
     end

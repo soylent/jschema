@@ -65,7 +65,7 @@ module JSchema
         schema_data = JSON.parse download_schema(uri)
         parent_schema = schema && schema.parent
         Schema.build(schema_data, parent_schema, uri.to_s)
-      rescue JSON::ParserError, Timeout::Error, Errno::ECONNREFUSED => e
+      rescue JSON::ParserError, Timeout::Error, Errno::ECONNREFUSED, Net::HTTPBadResponse => e
         raise InvalidSchema, "Failed to download external schema #{uri}. #{e.class}: #{e.message}"
       end
 
@@ -89,6 +89,7 @@ module JSchema
             return response.body
           end
         end
+        raise Net::HTTPBadResponse, "Too many redirects -- last location header was #{uri}"
       end
 
       def key(uri, schema)

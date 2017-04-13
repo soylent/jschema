@@ -1,6 +1,6 @@
 module JSchema
   class Schema
-    VERSION_ID = 'http://json-schema.org/draft-04/schema#'.freeze
+    VERSION_ID = 'http://json-schema.org/draft-04/schema'.freeze
 
     class << self
       def build(sch = {}, parent = nil, id = nil)

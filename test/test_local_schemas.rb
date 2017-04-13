@@ -7,7 +7,7 @@ class TestLocalSchemas < Minitest::Test
   @@original = JSchema::LocalSchemas.to_h
 
   def setup
-    JSchema::LocalSchemas.instance_variable_set(:@local_schemas, @@original)
+    JSchema::LocalSchemas.instance_variable_set(:@local_schemas, @@original.dup)
   end
   def teardown
     setup

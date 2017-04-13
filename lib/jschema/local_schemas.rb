@@ -9,16 +9,16 @@ module JSchema
     class << self
       def add schema_uri, schema_or_path
         uri = URI(schema_uri)
-        uri.fragment = nil
+        uri.fragment = ''
         unless JSONReference.valid_external_uri?(uri)
           raise ArgumentError, "#{uri} is not an absolute URI"
         end
-        @local_schemas[uri.to_s + "#"] = schema_or_path
+        @local_schemas[uri.to_s] = schema_or_path
       end
       def remove schema_uri
         uri = URI(schema_uri)
-        uri.fragment = nil
-        @local_schemas.delete(uri.to_s + "#")
+        uri.fragment = ''
+        @local_schemas.delete(uri.to_s)
       end
       def to_h
         @local_schemas.dup

@@ -11,6 +11,7 @@ documentation – [JSON Schema Documentation](http://json-schema.org/).
 ## Features
 
  - Implements JSON Schema draft 4 strictly according to the specification
+ - Can dereference schemas locally
  - Small, efficient and thread-safe
  - No dependencies
  - Clean and extensible code
@@ -176,6 +177,28 @@ email_schema.valid?('valid@example.com')
 email_schema.valid?('invalidexample.com')
 # => false
 ```
+
+## Local Schema Dereferencing
+
+Schemas that are referenced via `$ref` or `$schema` can be dereferenced locally if the namespace is added to the local schemas cache. If not found in the local cache, a (costly) HTTP request must be made at runtime to fetch it.
+
+We recommend for performance reasons that you add all referenced schemas to the local schema cache before using them.
+
+```ruby
+  # Deferences schema from a local file
+  JSchema::LocalSchemas.add "http://example.com/schema.json#", "local/path/to/schema.json"
+  JSchema::JSONReference.dereference URI("http://example.com/schema.json#/definitions/example"), nil
+
+  # Dereferences schema from string
+  JSchema::LocalSchemas.add "http://example.com/schema.json#", File.read("local/path/to/schema.json")
+  JSchema::JSONReference.dereference URI("http://example.com/schema.json#/definitions/example"), nil
+```
+
+This gem automatically provides the following schemas locally (as part of the cache):
+
+ * `http://json-schema.org/draft-04/schema#`
+ * `http://json-schema.org/draft-04/hyper-schema#`
+ * `http://swagger.io/v2/schema.json#`
 
 
 ## Contributing

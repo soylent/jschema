@@ -2,9 +2,9 @@ require 'minitest/autorun'
 
 class TestLocalSchemas < Minitest::Test
 
-  @@base = File.expand_path(File.join("..", "..", "local_schemas"), __FILE__)
-  @@schema_file = File.join(@@base, "swagger", "v2.0", "schema.json")
-  @@original = JSchema::LocalSchemas.to_h
+  @@base ||= File.expand_path(File.join("..", "..", "local_schemas"), __FILE__)
+  @@schema_file ||= File.join(@@base, "swagger", "v2.0", "schema.json")
+  @@original ||= JSchema::LocalSchemas.to_h
 
   def setup
     JSchema::LocalSchemas.instance_variable_set(:@local_schemas, @@original)

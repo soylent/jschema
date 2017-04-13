@@ -192,6 +192,13 @@ We recommend for performance reasons that you add all referenced schemas to the 
   # Dereferences schema from string
   JSchema::LocalSchemas.add "http://example.com/schema.json#", File.read("local/path/to/schema.json")
   JSchema::JSONReference.dereference URI("http://example.com/schema.json#/definitions/example"), nil
+
+  # Load all local schemas from a directory to enable relative $ref resolving
+  Dir["local_schemas/**/*.json"].each do |file|
+    contents = File.read file
+    uri = JSON.parse(contents)['id'] # It's important that each schema has a proper ID
+    JSchema::LocalSchemas.add uri, contents
+  end
 ```
 
 This gem automatically provides the following schemas locally (as part of the cache):

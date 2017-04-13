@@ -1,6 +1,9 @@
-## [Unreleased]
+# Change Log
+
+## [0.2.1] - 2017-04-13
+### Added
 - Adds compatibility with Ruby 2.4 (@kenaniah)
-- $ref now follows 301 and 302 redirects
+- $ref now follows 301 and 302 redirects (@kenaniah)
 
 ## [0.2.0] - 2016-02-24
 ### Added

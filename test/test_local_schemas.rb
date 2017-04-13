@@ -6,8 +6,11 @@ class TestLocalSchemas < Minitest::Test
   @@schema_file = File.join(@@base, "swagger", "v2.0", "schema.json")
   @@original = JSchema::LocalSchemas.to_h
 
-  def teardown
+  def setup
     JSchema::LocalSchemas.instance_variable_set(:@local_schemas, @@original)
+  end
+  def teardown
+    setup
   end
 
   def test_invalid_urls

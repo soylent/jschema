@@ -1,4 +1,6 @@
 # Change Log
+## [Unreleased]
+- Adds local schema caching (@kenaniah)
 
 ## [0.2.1] - 2017-04-13
 ### Added

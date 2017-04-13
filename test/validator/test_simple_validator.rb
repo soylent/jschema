@@ -71,13 +71,13 @@ class TestSimpleValidator < Minitest::Test
   end
 
   def test_that_validation_always_passes_if_validator_is_not_applicable
-    stub_validator Fixnum, false do |vdr|
+    stub_validator Integer, false do |vdr|
       assert vdr.valid?('instance')
     end
   end
 
   def test_failing_validation_when_validator_is_applicable
-    stub_validator Fixnum, false do |vdr|
+    stub_validator Integer, false do |vdr|
       refute vdr.valid?(0)
     end
   end

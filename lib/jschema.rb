@@ -2,6 +2,7 @@ require 'bigdecimal'
 require 'uri'
 require 'delegate'
 
+require 'jschema/local_schemas'
 require 'jschema/json_reference'
 require 'jschema/schema_ref'
 require 'jschema/schema_uri'

@@ -63,6 +63,10 @@ module JSchema
       JSchema::JSONReference.dereference(URI.parse(path), self)
     end
 
+    def to_h
+      @schema
+    end
+
     def to_s
       uri.to_s
     end

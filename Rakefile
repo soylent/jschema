@@ -17,6 +17,24 @@ gemspec = Gem::Specification.load('jschema.gemspec')
 Gem::PackageTask.new(gemspec) do |_pkg|
 end
 
+desc 'Updates the schema cache'
+task :update_local_schemas do
+  require "open-uri"
+  JSchema::LocalSchemas.each do |namespace, path|
+    begin
+      contents = open(namespace).read
+      schema = JSON.parse(contents) rescue raise("Could not parse file #{namespace}")
+      if schema['id'] != namespace
+        raise "ID #{schema['id']} does not match"
+      end
+    rescue => e
+      raise "Error parsing #{namespace} -- #{e.class}: #{e.message}"
+    end
+    puts "#{namespace} written to #{path}"
+    File.write(path, open(namespace).read)
+  end
+end
+
 desc 'CI tasks'
 task :ci do
   require 'coveralls'

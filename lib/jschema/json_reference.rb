@@ -27,6 +27,10 @@ module JSchema
         end
       end
 
+      def valid_external_uri?(uri)
+        uri.is_a?(URI::HTTP) && uri.absolute?
+      end
+
       private
 
       def expand_uri(uri, schema)
@@ -67,10 +71,6 @@ module JSchema
         Schema.build(schema_data, parent_schema, uri.to_s)
       rescue JSON::ParserError, Timeout::Error, Errno::ECONNREFUSED, Net::HTTPBadResponse => e
         raise InvalidSchema, "Failed to download external schema #{uri}. #{e.class}: #{e.message}"
-      end
-
-      def valid_external_uri?(uri)
-        uri.is_a?(URI::HTTP) && uri.absolute?
       end
 
       def download_schema(uri)

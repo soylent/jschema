@@ -74,6 +74,20 @@ module JSchema
       end
 
       def download_schema(uri)
+
+        uri = uri.dup
+        uri.fragment = ''
+
+        # First check local schema cache
+        local = JSchema::LocalSchemas.to_h[uri.to_s]
+        if local
+          if local.start_with? "{"
+            return local
+          end
+          return File.read(local)
+        end
+
+        # Then attempt to download from remote
         3.times do
           request = Net::HTTP::Get.new(uri.to_s)
           request['Accept'] = 'application/json+schema'
@@ -89,7 +103,9 @@ module JSchema
             return response.body
           end
         end
+
         raise Net::HTTPBadResponse, "Too many redirects -- last location header was #{uri}"
+
       end
 
       def key(uri, schema)

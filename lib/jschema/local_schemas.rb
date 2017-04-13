@@ -15,8 +15,13 @@ module JSchema
         end
         @local_schemas[uri.to_s] = schema_or_path
       end
-      def each(&block)
-        @local_schemas.each(&block)
+      def remove schema_uri
+        uri = URI(schema_uri)
+        uri.fragment = ''
+        @local_schemas.delete(uri.to_s)
+      end
+      def to_h
+        @local_schemas.dup
       end
     end
   end

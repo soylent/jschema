@@ -20,7 +20,7 @@ end
 desc 'Updates the schema cache'
 task :update_local_schemas do
   require "open-uri"
-  JSchema::LocalSchemas.each do |namespace, path|
+  JSchema::LocalSchemas.to_h.each do |namespace, path|
     begin
       contents = open(namespace).read
       schema = JSON.parse(contents) rescue raise("Could not parse file #{namespace}")

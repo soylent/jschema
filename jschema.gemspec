@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.summary     = 'JSON Schema implementation'
   s.description = 'Implementation of JSON Schema Draft 4'
   s.license     = 'MIT'
-  s.homepage    = 'https://github.com/Soylent/jschema'
+  s.homepage    = 'https://github.com/soylent/jschema'
   s.authors     = 'Konstantin Papkovskiy'
   s.email       = 'konstantin@papkovskiy.com'
 

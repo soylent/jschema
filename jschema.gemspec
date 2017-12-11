@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
 
   s.files        = Dir['lib/**/*.rb']
   s.require_path = 'lib'
+  s.add_development_dependency 'benchmark-ips', '~> 2.7'
 end

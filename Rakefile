@@ -7,6 +7,7 @@ require 'jschema'
 load 'json_schema_tests.rake'
 
 Rake::TestTask.new do |test|
+  test.libs << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.warning = true
 end
@@ -20,11 +21,7 @@ desc 'CI tasks'
 task :ci do
   require 'coveralls'
   Coveralls.wear!
-
-  tests = Dir['test/**/test_*.rb']
-  tests.each do |test|
-    require_relative test
-  end
+  Rake::Task[:test].invoke
 end
 
 task default: :ci

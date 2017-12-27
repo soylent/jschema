@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require 'helper'
 require_relative 'assert_received'
 
 class TestAssertReceived < Minitest::Test

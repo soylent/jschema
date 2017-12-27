@@ -1,5 +1,5 @@
-# encoding: utf-8
-require 'minitest/autorun'
+require 'helper'
+
 require_relative 'assertions'
 
 class TestFormat < Minitest::Test

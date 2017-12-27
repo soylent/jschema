@@ -1,7 +1,5 @@
-require 'minitest/autorun'
+require 'helper'
 require 'webmock/minitest'
-require 'jschema'
-require 'json'
 
 class TestIntegration < Minitest::Test
   def test_simple_schema

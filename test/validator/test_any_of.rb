@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'jschema'
+require 'helper'
 
 require_relative 'assertions'
 require_relative 'schema_validation_helpers'

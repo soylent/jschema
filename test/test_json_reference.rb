@@ -1,6 +1,5 @@
-require 'minitest/autorun'
 require 'webmock/minitest'
-require 'jschema'
+require 'helper'
 require 'ostruct'
 
 require_relative 'assert_received'

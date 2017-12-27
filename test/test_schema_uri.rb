@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'jschema'
+require 'helper'
 
 class TestSchemaURI < Minitest::Test
   def test_default_uri

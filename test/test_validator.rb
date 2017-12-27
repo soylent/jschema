@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'jschema'
+require 'helper'
 
 class TestValidatorInstantiation < Minitest::Test
   def test_creating_of_validators

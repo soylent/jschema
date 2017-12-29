@@ -4,7 +4,7 @@ require 'webmock/minitest'
 class TestIntegration < Minitest::Test
   def test_simple_schema
     stub_request(:get, 'http://json-schema.org/geo')
-      .to_return(body: Pathname.new('test/fixtures/geo.json'))
+      .to_return(body: Pathname.new('test/support/fixtures/geo.json'))
 
     validate 'json_schema1.json', 'json_data1.json'
   end
@@ -23,6 +23,6 @@ class TestIntegration < Minitest::Test
   end
 
   def json_fixture(filename)
-    JSON.parse open(File.join('test', 'fixtures', filename)).read
+    JSON.parse open(File.join('test', 'support', 'fixtures', filename)).read
   end
 end

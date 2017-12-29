@@ -2,8 +2,8 @@ require 'benchmark/ips'
 require 'jschema'
 require 'json'
 
-json = JSON.parse(File.read('test/fixtures/json_data2.json'))
-schema = JSON.parse(File.read('test/fixtures/json_schema2.json'))
+json = JSON.parse(File.read('test/support/fixtures/json_data2.json'))
+schema = JSON.parse(File.read('test/support/fixtures/json_schema2.json'))
 jschema = JSchema.build(schema)
 
 Benchmark.ips do |x|

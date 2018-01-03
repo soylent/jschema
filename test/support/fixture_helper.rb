@@ -5,6 +5,8 @@ require 'pathname'
 
 # Fixture helper methods
 module FixtureHelper
+  module_function
+
   # Build a fixture with a given name
   #
   # @param name [String] the fixture name

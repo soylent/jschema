@@ -1,9 +1,12 @@
-require 'benchmark/ips'
-require 'jschema'
-require 'json'
+$LOAD_PATH.unshift(File.realpath(File.expand_path('..', __dir__)))
 
-json = JSON.parse(File.read('test/support/fixtures/json_data2.json'))
-schema = JSON.parse(File.read('test/support/fixtures/json_schema2.json'))
+require 'benchmark/ips'
+require 'json'
+require 'lib/jschema'
+require 'test/support/fixture_helper'
+
+json = FixtureHelper.fixture('json_data2')
+schema = FixtureHelper.fixture('json_schema2')
 jschema = JSchema.build(schema)
 
 Benchmark.ips do |x|

@@ -2,9 +2,11 @@ require 'webmock/minitest'
 require 'helper'
 require 'ostruct'
 
-require_relative 'assert_received'
+require 'support/assertion_helper'
 
 class TestJSONReference < Minitest::Test
+  include AssertionHelper
+
   def test_schema_registration_and_dereferencing
     schema = generate_schema('registered')
     JSchema::JSONReference.register_schema schema

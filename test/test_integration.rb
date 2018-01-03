@@ -1,28 +1,25 @@
 require 'helper'
 require 'webmock/minitest'
+require 'support/fixture_helper'
 
 class TestIntegration < Minitest::Test
+  include FixtureHelper
+
   def test_simple_schema
     stub_request(:get, 'http://json-schema.org/geo')
-      .to_return(body: Pathname.new('test/support/fixtures/geo.json'))
+      .to_return(body: read_fixture('geo'))
 
-    validate 'json_schema1.json', 'json_data1.json'
+    validate 'json_schema1', 'json_data1'
   end
 
   def test_advanced_schema
-    validate 'json_schema2.json', 'json_data2.json'
+    validate 'json_schema2', 'json_data2'
   end
 
   private
 
-  def validate(schema_file, data_file)
-    sch = json_fixture(schema_file).freeze
-    schema = JSchema::Schema.build(sch)
-    data = json_fixture(data_file)
-    assert schema.valid?(data)
-  end
-
-  def json_fixture(filename)
-    JSON.parse open(File.join('test', 'support', 'fixtures', filename)).read
+  def validate(schema_name, data_name)
+    schema = JSchema::Schema.build(fixture(schema_name))
+    assert schema.valid?(fixture(data_name))
   end
 end

@@ -22,8 +22,11 @@ module SchemaValidationHelpers
   end
 
   def generate_schema
-    @id ||= 0
-    @id += 1
-    { 'id' => @id.to_s }
+    { 'id' => generate_schema_id }
+  end
+
+  def generate_schema_id
+    @schema_id ||= '0'
+    @schema_id = @schema_id.succ.freeze
   end
 end

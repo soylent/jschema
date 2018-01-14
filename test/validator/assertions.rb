@@ -1,12 +1,18 @@
 module Assertions
-  def assert_raises_unless(keyword, *valid_types)
-    basic_types = {
-      array: [], boolean: true, integer: 1,
-      number: 1.2, object: {}, string: 'test'
-    }
+  JSON_DATA_TYPES = {
+    array: [],
+    boolean: true,
+    integer: 1,
+    number: 1.2,
+    object: {},
+    string: 'test'
+  }.freeze
 
-    invalid_values = basic_types.select do |type, _|
-      !valid_types.include?(type)
+  private_constant :JSON_DATA_TYPES
+
+  def assert_raises_unless(keyword, *valid_types)
+    invalid_values = JSON_DATA_TYPES.reject do |type, _|
+      valid_types.include?(type)
     end.values
 
     assert_raises_for_values keyword, invalid_values

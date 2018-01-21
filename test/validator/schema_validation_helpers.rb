@@ -8,11 +8,18 @@ module SchemaValidationHelpers
       validate(instance).empty?
     end
 
-    def validate(instance)
-      result = @validation_results.next
-      result ? [] : ['error']
+    SUCCESS = [].freeze
+    private_constant :SUCCESS
+
+    ERROR = ['error'].freeze
+    private_constant :ERROR
+
+    def validate(_instance)
+      @validation_results.next ? SUCCESS : ERROR
     end
   end
+
+  private_constant :SchemaStub
 
   def stub_schema_validations(*validation_results)
     schema = SchemaStub.new(validation_results)

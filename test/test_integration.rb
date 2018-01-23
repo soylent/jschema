@@ -1,9 +1,9 @@
 require 'helper'
 require 'webmock/minitest'
-require 'support/fixture_helper'
+require 'support/fixture_helpers'
 
 class TestIntegration < Minitest::Test
-  include FixtureHelper
+  include FixtureHelpers
 
   def test_simple_schema
     stub_request(:get, 'http://json-schema.org/geo')

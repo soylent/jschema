@@ -3,10 +3,10 @@ $LOAD_PATH.unshift(File.realpath(File.expand_path('..', __dir__)))
 require 'benchmark/ips'
 require 'json'
 require 'lib/jschema'
-require 'test/support/fixture_helper'
+require 'test/support/fixture_helpers'
 
-json = FixtureHelper.fixture('json_data2')
-schema = FixtureHelper.fixture('json_schema2')
+json = FixtureHelpers.fixture('json_data2')
+schema = FixtureHelpers.fixture('json_schema2')
 jschema = JSchema.build(schema)
 
 Benchmark.ips do |x|

@@ -4,7 +4,7 @@ require 'json'
 require 'pathname'
 
 # Fixture helper methods
-module FixtureHelper
+module FixtureHelpers
   module_function
 
   # Build a fixture with a given name

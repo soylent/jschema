@@ -1,10 +1,10 @@
 require 'webmock/minitest'
 require 'helper'
 
-require 'support/assertion_helper'
+require 'support/assertion_helpers'
 
 class TestSchema < Minitest::Test
-  include AssertionHelper
+  include AssertionHelpers
 
   def test_empty_schema
     JSchema::Validator.stub :build, [] do

@@ -1,4 +1,4 @@
-module AssertionHelper
+module AssertionHelpers
   def assert_received(receiver, message, args = [])
     mock = MiniTest::Mock.new
     mock.expect(message, nil, args)

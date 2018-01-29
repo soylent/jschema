@@ -1,8 +1,8 @@
 require 'helper'
-require 'support/assertion_helper'
+require 'support/assertion_helpers'
 
 class TestAssertReceived < Minitest::Test
-  include AssertionHelper
+  include AssertionHelpers
 
   def test_message_sending_without_params
     assert_received(Object, :class) do

@@ -1,7 +1,7 @@
 require 'helper'
 
 require 'support/validator_assertion_helpers'
-require_relative '../string_length_validator_tests'
+require 'support/shared/string_length_validator_tests'
 
 class TestMinLength < Minitest::Test
   include ValidatorAssertionHelpers

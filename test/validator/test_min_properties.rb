@@ -1,7 +1,7 @@
 require 'helper'
 
 require 'support/validator_assertion_helpers'
-require_relative 'properties_limit_tests'
+require 'support/shared/properties_limit_tests'
 
 class TestMinProperties < Minitest::Test
   include ValidatorAssertionHelpers

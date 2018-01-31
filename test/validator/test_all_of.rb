@@ -2,7 +2,7 @@ require 'helper'
 
 require 'support/validator_assertion_helpers'
 require_relative 'schema_validation_helpers'
-require_relative 'validation_against_schemas_tests'
+require 'support/shared/validation_against_schemas_tests'
 
 class TestAllOf < Minitest::Test
   include ValidatorAssertionHelpers

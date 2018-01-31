@@ -1,10 +1,10 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 require_relative '../string_length_validator_tests'
 
 class TestMinLength < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
   include StringLengthValidatorTests
 
   def test_that_argument_is_not_a_negative_number

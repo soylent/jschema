@@ -1,10 +1,10 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 require_relative '../string_length_validator_tests'
 
 class TestMaxLength < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
   include StringLengthValidatorTests
 
   def test_that_argument_is_a_positive_number

@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestEnum < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_argument_is_non_empty_array_of_unique_values
     assert_raises_unless_non_empty_array 'enum'

@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestMinItems < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_argument_is_non_negative_iteger
     assert_raises_unless_non_negative_integer 'minItems'

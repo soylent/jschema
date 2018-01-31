@@ -1,10 +1,10 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 require_relative 'schema_validation_helpers'
 
 class TestItems < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
   include SchemaValidationHelpers
 
   def test_that_additional_items_must_be_boolean_or_schema

@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestPattern < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_only_valid_regexp_is_allowed
     assert_raises_unless 'pattern', :string

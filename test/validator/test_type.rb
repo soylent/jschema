@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestType < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_argument_is_a_string_or_an_array
     assert_raises_unless 'type', :string, :array

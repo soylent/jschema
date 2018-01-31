@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestSimpleValidator < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def setup
     super

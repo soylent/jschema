@@ -1,11 +1,11 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 require_relative 'schema_validation_helpers'
 
 # rubocop:disable ClassLength
 class TestProperties < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
   include SchemaValidationHelpers
 
   def test_invalid_properties_argument

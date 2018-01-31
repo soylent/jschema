@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestRequired < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_argument_is_string_array
     assert_raises_unless_string_array 'required'

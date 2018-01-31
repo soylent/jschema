@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestMaximum < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_maximum_is_a_number
     assert_raises_unless 'maximum', :integer, :number

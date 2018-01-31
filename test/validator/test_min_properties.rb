@@ -1,10 +1,10 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 require_relative 'properties_limit_tests'
 
 class TestMinProperties < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
   include PropertiesLimitTests
 
   def test_building_validator_from_schema

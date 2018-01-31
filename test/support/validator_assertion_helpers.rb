@@ -1,4 +1,4 @@
-module Assertions
+module ValidatorAssertionHelpers
   JSON_DATA_TYPES = {
     array: [],
     boolean: true,

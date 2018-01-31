@@ -1,9 +1,9 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 
 class TestFormat < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
 
   def test_that_argument_is_string
     assert_raises_unless('format', :string)

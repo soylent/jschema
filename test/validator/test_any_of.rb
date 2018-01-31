@@ -1,11 +1,11 @@
 require 'helper'
 
-require_relative 'assertions'
+require 'support/validator_assertion_helpers'
 require_relative 'schema_validation_helpers'
 require_relative 'validation_against_schemas_tests'
 
 class TestAnyOf < Minitest::Test
-  include Assertions
+  include ValidatorAssertionHelpers
   include SchemaValidationHelpers
   include ValidationAgainstSchemasTests
 

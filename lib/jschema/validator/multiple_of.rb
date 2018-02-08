@@ -14,11 +14,11 @@ module JSchema
       end
 
       def post_initialize(multiple_of)
-        @multiple_of = BigDecimal.new(multiple_of.to_s)
+        @multiple_of = BigDecimal(multiple_of.to_s)
       end
 
       def validate_instance(instance)
-        number = BigDecimal.new(instance.to_s)
+        number = BigDecimal(instance.to_s)
         div_remainder = number % @multiple_of
         unless div_remainder == 0
           "#{instance} must be a multiple of #{@multiple_of}"

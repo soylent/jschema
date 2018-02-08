@@ -68,7 +68,7 @@ class TestType < Minitest::Test
   def test_passing_number_validation
     assert validator('number').valid?(1)
     assert validator('number').valid?(1.2)
-    assert validator('number').valid?(BigDecimal.new('1.2'))
+    assert validator('number').valid?(BigDecimal('1.2'))
     assert validator('number').valid?(2**64)
   end
 

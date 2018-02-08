@@ -1,12 +1,10 @@
 module AssertionHelpers
-  def assert_received(receiver, message, args = [])
+  def assert_received(receiver, expected_message, expected_args = [])
     mock = MiniTest::Mock.new
-    mock.expect(message, nil, args)
-    receiver_stub = ->(*arg) { mock.__send__ message, *arg }
+    mock.expect(expected_message, nil, expected_args)
 
-    receiver.stub message, receiver_stub do
-      yield if block_given?
-    end
+    receiver_stub = ->(*args) { mock.__send__(expected_message, *args) }
+    receiver.stub(expected_message, receiver_stub) { yield if block_given? }
 
     mock.verify
   end

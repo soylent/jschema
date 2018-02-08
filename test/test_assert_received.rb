@@ -5,37 +5,38 @@ class TestAssertReceived < Minitest::Test
   include AssertionHelpers
 
   def test_message_sending_without_params
-    assert_received(Object, :class) do
-      Object.class
+    obj = Object.new
+
+    assert_received(obj, :class) { obj.class }
+  end
+
+  def test_assertion_failure_when_message_is_not_received
+    obj = Object.new
+
+    assert_raises(MockExpectationError) { assert_received(obj, :class) }
+  end
+
+  def test_assertion_failure_when_unexpected_message_is_received
+    obj = Object.new
+
+    assert_raises(MockExpectationError) do
+      assert_received(obj, :clone) { obj.dup }
     end
   end
 
   def test_message_sending_with_params
-    assert_received(String, :==, [Integer]) do
-      String == Integer
-    end
-  end
+    obj = Object.new
+    other_obj = Object.new
 
-  def test_assertion_failure_when_message_is_not_received
-    assert_raises(MockExpectationError) do
-      assert_received(String, :class) do
-      end
-    end
-  end
-
-  def test_assertion_failure_when_unexpected_message_is_received
-    assert_raises(MockExpectationError) do
-      assert_received(String, :class) do
-        String.name
-      end
-    end
+    assert_received(obj, :==, [other_obj]) { obj == other_obj }
   end
 
   def test_assertion_failure_when_unexpected_params_are_received
+    obj = Object.new
+    other_obj = Object.new
+
     assert_raises(MockExpectationError) do
-      assert_received(String, :==, [Integer]) do
-        String == TrueClass
-      end
+      assert_received(obj, :==, [true]) { obj == other_obj }
     end
   end
 end

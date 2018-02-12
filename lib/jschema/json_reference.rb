@@ -79,9 +79,6 @@ module JSchema
           request['Accept'] = 'application/json+schema'
 
           http = Net::HTTP.new(uri.hostname, uri.port)
-          http.read_timeout = 3
-          http.open_timeout = 2
-          http.continue_timeout = 1
           response = http.request(request)
           if ["301", "302"].include?(response.code)
             uri = URI.parse(response.header['location'])

@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class Enum < SimpleValidator
+    class Enum < ValidatorBase
       private
 
       self.keywords = ['enum']

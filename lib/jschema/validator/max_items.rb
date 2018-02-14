@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class MaxItems < SimpleValidator
+    class MaxItems < ValidatorBase
       private
 
       self.keywords = ['maxItems']

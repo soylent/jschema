@@ -2,12 +2,12 @@ require 'helper'
 
 require 'support/validator_assertion_helpers'
 
-class TestSimpleValidator < Minitest::Test
+class TestValidatorBase < Minitest::Test
   include ValidatorAssertionHelpers
 
   def setup
     super
-    @validator_class = Class.new(JSchema::SimpleValidator) do
+    @validator_class = Class.new(JSchema::ValidatorBase) do
       private
 
       self.keywords = ['param']
@@ -59,7 +59,7 @@ class TestSimpleValidator < Minitest::Test
 
   def test_invalid_params
     assert_raises(JSchema::InvalidSchema) do
-      Class.new(JSchema::SimpleValidator) do
+      Class.new(JSchema::ValidatorBase) do
         private
 
         def validate_args

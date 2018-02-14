@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class Required < SimpleValidator
+    class Required < ValidatorBase
       private
 
       self.keywords = ['required']

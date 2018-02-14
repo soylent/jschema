@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class AllOf < SimpleValidator
+    class AllOf < ValidatorBase
       private
 
       self.keywords = ['allOf']

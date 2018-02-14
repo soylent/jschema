@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class Properties < SimpleValidator
+    class Properties < ValidatorBase
       private
 
       self.keywords = [

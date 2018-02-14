@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class MultipleOf < SimpleValidator
+    class MultipleOf < ValidatorBase
       private
 
       self.keywords = ['multipleOf']

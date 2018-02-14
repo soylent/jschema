@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class Pattern < SimpleValidator
+    class Pattern < ValidatorBase
       private
 
       # Fix because of Rubinius

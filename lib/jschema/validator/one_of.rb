@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class OneOf < SimpleValidator
+    class OneOf < ValidatorBase
       private
 
       self.keywords = ['oneOf']

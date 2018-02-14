@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class Items < SimpleValidator
+    class Items < ValidatorBase
       private
 
       self.keywords = ['items', 'additionalItems']

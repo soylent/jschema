@@ -1,5 +1,5 @@
 module JSchema
-  class SimpleValidator
+  class ValidatorBase
     class << self
       def build(schema, parent)
         args = schema.values_at(*keywords)

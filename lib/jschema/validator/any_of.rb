@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class AnyOf < SimpleValidator
+    class AnyOf < ValidatorBase
       private
 
       self.keywords = ['anyOf']

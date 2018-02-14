@@ -4,7 +4,7 @@ require 'webrick/httputils'
 
 module JSchema
   module Validator
-    class Format < SimpleValidator
+    class Format < ValidatorBase
       private
 
       self.keywords = ['format']

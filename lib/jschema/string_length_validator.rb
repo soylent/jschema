@@ -1,5 +1,5 @@
 module JSchema
-  class StringLengthValidator < SimpleValidator
+  class StringLengthValidator < ValidatorBase
     private
 
     def post_initialize(length_limit)

@@ -1,6 +1,6 @@
 module JSchema
   module Validator
-    class Not < SimpleValidator
+    class Not < ValidatorBase
       private
 
       self.keywords = ['not']

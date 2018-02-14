@@ -65,28 +65,30 @@ module JSchema
         schema_data = JSON.parse download_schema(uri)
         parent_schema = schema && schema.parent
         Schema.build(schema_data, parent_schema, uri.to_s)
-      rescue JSON::ParserError, Timeout::Error, Errno::ECONNREFUSED, Net::HTTPBadResponse => e
-        raise InvalidSchema, "Failed to download external schema #{uri}. #{e.class}: #{e.message}"
+      rescue JSON::ParserError => error
+        raise InvalidSchema, error.message
       end
 
       def valid_external_uri?(uri)
         uri.is_a?(URI::HTTP) && uri.absolute?
       end
 
-      def download_schema(uri)
-        3.times do
-          request = Net::HTTP::Get.new(uri.to_s)
+      def download_schema(url, max_redirects: 3)
+        max_redirects.times do
+          request = Net::HTTP::Get.new(url.to_s)
           request['Accept'] = 'application/json+schema'
 
-          http = Net::HTTP.new(uri.hostname, uri.port)
+          http = Net::HTTP.new(url.hostname, url.port)
           response = http.request(request)
-          if ["301", "302"].include?(response.code)
-            uri = URI.parse(response.header['location'])
-          else
-            return response.body
-          end
+
+          return response.body unless response.is_a?(Net::HTTPRedirection)
+
+          url = URI.parse(response['location'])
         end
-        raise Net::HTTPBadResponse, "Too many redirects -- last location header was #{uri}"
+
+        raise InvalidSchema, "Too many redirects; last location: #{url}"
+      rescue Timeout::Error, Errno::ECONNREFUSED => error
+        raise InvalidSchema, "Download failed #{url}: #{error.message.inspect}"
       end
 
       def key(uri, schema)

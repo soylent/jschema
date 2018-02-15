@@ -1,3 +1,5 @@
+require 'jschema/string_length_validator'
+
 module JSchema
   module Validator
     class MaxLength < StringLengthValidator

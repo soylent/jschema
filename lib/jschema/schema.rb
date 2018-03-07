@@ -1,3 +1,8 @@
+require 'jschema/json_reference'
+require 'jschema/schema_ref'
+require 'jschema/schema_uri'
+require 'jschema/validator'
+
 module JSchema
   class Schema
     VERSION_ID = 'http://json-schema.org/draft-04/schema#'.freeze

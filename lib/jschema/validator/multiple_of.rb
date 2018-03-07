@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module JSchema
   module Validator
     class MultipleOf < ValidatorBase

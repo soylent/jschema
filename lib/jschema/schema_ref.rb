@@ -1,3 +1,5 @@
+require 'delegate'
+
 module JSchema
   # Schema reference is lazy evaluated.
   class SchemaRef < Delegator

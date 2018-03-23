@@ -67,7 +67,7 @@ module JSchema
         when Hash
           Schema.build @items, parent, 'items'
         else
-          fail UnknownError
+          raise UnknownError
         end
       end
 

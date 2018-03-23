@@ -16,7 +16,7 @@ module JSchema
             join_fragments(parent_schema.uri.fragment, id)
           else
             # RFC 3986, cl. 5.1.4
-            fail InvalidSchema, 'Cannot establish base URI'
+            raise InvalidSchema, 'Cannot establish base URI'
           end
         else
           uri(schema_id || id || '#')

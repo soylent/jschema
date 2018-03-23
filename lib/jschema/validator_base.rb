@@ -23,7 +23,7 @@ module JSchema
       if validate_args(*args)
         post_initialize(*args)
       else
-        fail InvalidSchema
+        raise InvalidSchema
       end
     end
 
@@ -43,7 +43,7 @@ module JSchema
     def applicable_type; end
 
     def invalid_schema(keyword, value)
-      fail InvalidSchema, "Invalid `#{keyword}` value: #{value.inspect}"
+      raise InvalidSchema, "Invalid `#{keyword}` value: #{value.inspect}"
     end
   end
 end

@@ -59,7 +59,7 @@ module JSchema
 
       def build_external_schema(uri, schema)
         unless valid_external_uri?(uri)
-          fail InvalidSchema, "Invalid URI for external schema: #{uri}"
+          raise InvalidSchema, "Invalid URI for external schema: #{uri}"
         end
 
         schema_data = JSON.parse download_schema(uri)

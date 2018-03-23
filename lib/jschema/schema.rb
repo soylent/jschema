@@ -31,7 +31,7 @@ module JSchema
       def check_schema_version(schema)
         version = schema['$schema']
         if version && version != VERSION_ID
-          fail InvalidSchema, 'Specified schema version is not supported'
+          raise InvalidSchema, 'Specified schema version is not supported'
         end
       end
 

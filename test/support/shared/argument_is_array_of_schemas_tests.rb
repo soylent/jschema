@@ -13,7 +13,7 @@ module ArgumentIsArrayOfSchemasTests
 
   def test_that_argument_contains_only_valid_json_schemas
     assert_raises(JSchema::InvalidSchema) do
-      raises_error = ->(*_) { fail JSchema::InvalidSchema }
+      raises_error = ->(*_) { raise JSchema::InvalidSchema }
       JSchema::Schema.stub :build, raises_error do
         validator [{}]
       end

@@ -51,7 +51,7 @@ module JSchema
           required = Validator::Required.new(validator, nil)
           Array required.validate(instance)
         else
-          fail UnknownError
+          raise UnknownError
         end
       end
 

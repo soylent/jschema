@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'argument_is_array_of_schemas_tests'
 
 module ValidationAgainstSchemasTests

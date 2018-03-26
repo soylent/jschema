@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'webmock/minitest'
 require 'helper'
 require 'ostruct'

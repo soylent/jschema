@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jschema/validation_helpers'
 
 module JSchema

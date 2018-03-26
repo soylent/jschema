@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ValidatorAssertionHelpers
   JSON_DATA_TYPES = {
     array: [],

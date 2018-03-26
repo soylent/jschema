@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'helper'
 
 require 'support/validator_assertion_helpers'

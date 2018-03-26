@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PropertiesLimitTests
   def test_that_argument_is_an_integer
     assert_raises(JSchema::InvalidSchema) { validator 'string' }

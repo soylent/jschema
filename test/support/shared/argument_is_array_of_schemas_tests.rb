@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ArgumentIsArrayOfSchemasTests
   def test_that_argument_is_array
     assert_raises(JSchema::InvalidSchema) { validator(0) }

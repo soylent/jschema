@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jschema/validator_base'
 require 'jschema/validator/max_length'
 require 'jschema/validator/min_length'

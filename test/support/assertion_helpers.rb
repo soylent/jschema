@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AssertionHelpers
   def assert_received(receiver, expected_message, expected_args = [])
     mock = MiniTest::Mock.new

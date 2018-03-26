@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StringLengthValidatorTests
   def test_that_argument_can_be_big_integer
     validator(2**64)

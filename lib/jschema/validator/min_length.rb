@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jschema/string_length_validator'
 
 module JSchema

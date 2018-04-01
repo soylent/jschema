@@ -32,9 +32,11 @@ module JSchema
 
       def check_schema_version(schema)
         version = schema['$schema']
-        if version && version != VERSION_ID
-          raise InvalidSchema, 'Specified schema version is not supported'
-        end
+
+        return unless version
+        return if version == VERSION_ID
+
+        raise InvalidSchema, 'Specified schema version is not supported'
       end
 
       def register_definitions(schema, parent)

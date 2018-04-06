@@ -40,11 +40,13 @@ module JSchema
       end
 
       def register_definitions(schema, parent)
-        if (definitions = schema['definitions'])
-          definitions.each do |definition, sch|
-            schema_def = build(sch, parent, "definitions/#{definition}")
-            JSONReference.register_schema schema_def
-          end
+        definitions = schema['definitions']
+
+        return unless definitions
+
+        definitions.each do |definition, sch|
+          schema_def = build(sch, parent, "definitions/#{definition}")
+          JSONReference.register_schema schema_def
         end
       end
     end

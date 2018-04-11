@@ -65,9 +65,7 @@ module JSchema
     end
 
     def validate(instance)
-      @validators.map do |validator|
-        validator.validate(instance)
-      end.compact
+      @validators.map { |validator| validator.validate(instance) }.compact
     end
 
     def fragment(path)

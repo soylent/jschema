@@ -4,7 +4,7 @@ require 'jschema/string_length_validator'
 
 module JSchema
   module Validator
-    class MinLength < JSchema::StringLengthValidator
+    class MinLength < StringLengthValidator
       private
 
       self.keywords = ['minLength']

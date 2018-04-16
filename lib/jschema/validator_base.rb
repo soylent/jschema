@@ -22,11 +22,9 @@ module JSchema
     def initialize(*args, parent)
       @parent = parent
 
-      if validate_args(*args)
-        post_initialize(*args)
-      else
-        raise InvalidSchema
-      end
+      raise InvalidSchema unless validate_args(*args)
+
+      post_initialize(*args)
     end
 
     def valid?(instance)

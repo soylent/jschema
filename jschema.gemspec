@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/soylent/jschema'
   spec.authors = 'Konstantin Papkovskiy'
   spec.email = 'konstantin@papkovskiy.com'
-  spec.required_ruby_version = '>= 1.9.3'
+  spec.required_ruby_version = '>= 2.3'
   spec.files = Dir['lib/**/*.rb']
   spec.require_path = 'lib'
   spec.add_development_dependency 'benchmark-ips', '~> 2.7'

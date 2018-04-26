@@ -32,7 +32,7 @@ module JSchema
       private
 
       def expand_uri(uri, schema)
-        if schema && schema.uri.absolute?
+        if schema&.uri&.absolute?
           normalize schema.uri.merge(uri)
         else
           normalize uri
@@ -65,7 +65,7 @@ module JSchema
         end
 
         schema_data = JSON.parse download_schema(uri)
-        parent_schema = schema && schema.parent
+        parent_schema = schema&.parent
         Schema.build(schema_data, parent_schema, uri.to_s)
       rescue JSON::ParserError => error
         raise InvalidSchema, error.message

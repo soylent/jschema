@@ -5,10 +5,10 @@ module JSchema
     class Properties < ValidatorBase
       private
 
-      self.keywords = [
-        'properties',
-        'patternProperties',
-        'additionalProperties'
+      self.keywords = %w[
+        properties
+        patternProperties
+        additionalProperties
       ]
 
       def validate_args(properties, pattern_properties, additional_properties)

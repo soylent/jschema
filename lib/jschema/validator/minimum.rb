@@ -5,7 +5,7 @@ module JSchema
     class Minimum < ValidatorBase
       private
 
-      self.keywords = ['minimum', 'exclusiveMinimum']
+      self.keywords = %w[minimum exclusiveMinimum]
 
       def validate_args(minimum, exclusive_minimum)
         number?(minimum) || invalid_schema('minimum', minimum)

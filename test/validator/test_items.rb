@@ -44,14 +44,14 @@ class TestItems < Minitest::Test
     basic_schema = generate_schema
     stub_schema_validations(true) do
       schema = { 'items' => [basic_schema, basic_schema] }
-      assert build_from_schema(schema).valid?(['test', 'test'])
+      assert build_from_schema(schema).valid?(%w[test test])
     end
   end
 
   def test_passing_validation_by_items_when_additional_items_is_omitted
     stub_schema_validations(true) do
       schema = { 'items' => [generate_schema] }
-      assert build_from_schema(schema).valid?(['test', 'test'])
+      assert build_from_schema(schema).valid?(%w[test test])
     end
   end
 
@@ -61,7 +61,7 @@ class TestItems < Minitest::Test
         'items' => [generate_schema],
         'additionalItems' => generate_schema
       }
-      assert build_from_schema(schema).valid?(['test', 'test'])
+      assert build_from_schema(schema).valid?(%w[test test])
     end
   end
 
@@ -91,14 +91,14 @@ class TestItems < Minitest::Test
         'items' => [generate_schema],
         'additionalItems' => false
       }
-      refute build_from_schema(schema).valid?(['test', 'test'])
+      refute build_from_schema(schema).valid?(%w[test test])
     end
   end
 
   def test_failing_validation_by_items_schema_array
     stub_schema_validations(false, true) do
       schema = { 'items' => [generate_schema, generate_schema] }
-      refute build_from_schema(schema).valid?(['test', 'test'])
+      refute build_from_schema(schema).valid?(%w[test test])
     end
   end
 
@@ -108,7 +108,7 @@ class TestItems < Minitest::Test
         'items' => [generate_schema],
         'additionalItems' => generate_schema
       }
-      refute build_from_schema(schema).valid?(['test', 'test'])
+      refute build_from_schema(schema).valid?(%w[test test])
     end
   end
 

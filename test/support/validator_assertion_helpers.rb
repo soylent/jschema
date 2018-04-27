@@ -32,12 +32,12 @@ module ValidatorAssertionHelpers
   end
 
   def assert_raises_unless_string_array(keyword)
-    invalid_values = [0, [], ['test', 'test'], [0]]
+    invalid_values = [0, [], %w[test test], [0]]
     assert_raises_for_values keyword, invalid_values
   end
 
   def assert_raises_unless_non_empty_array(keyword)
-    invalid_values = [0, [], ['test', 'test']]
+    invalid_values = [0, [], %w[test test]]
     assert_raises_for_values keyword, invalid_values
   end
 

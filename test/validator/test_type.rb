@@ -79,13 +79,13 @@ class TestType < Minitest::Test
   end
 
   def test_passing_multiple_type_validation
-    mvalidator = validator ['string', 'null']
+    mvalidator = validator %w[string null]
     assert mvalidator.valid?('str')
     assert mvalidator.valid?(nil)
   end
 
   def test_failing_multiple_type_validation
-    mvalidator = validator ['string', 'null']
+    mvalidator = validator %w[string null]
     refute mvalidator.valid?(1)
     refute mvalidator.valid?(false)
   end

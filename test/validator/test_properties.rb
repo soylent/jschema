@@ -92,7 +92,7 @@ class TestProperties < Minitest::Test
   end
 
   def keywords
-    ['properties', 'patternProperties', 'additionalProperties']
+    %w[properties patternProperties additionalProperties]
   end
 
   def validator_with_additional_properties

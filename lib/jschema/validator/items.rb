@@ -5,7 +5,7 @@ module JSchema
     class Items < ValidatorBase
       private
 
-      self.keywords = ['items', 'additionalItems']
+      self.keywords = %w[items additionalItems]
 
       def validate_args(items, additional_items)
         additional_items_valid? additional_items

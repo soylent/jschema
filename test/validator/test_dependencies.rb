@@ -33,7 +33,7 @@ class TestDependencies < Minitest::Test
 
   def test_that_property_dependency_containt_uniq_elements
     assert_raises(JSchema::InvalidSchema) do
-      validator('test' => ['property', 'property'])
+      validator('test' => %w[property property])
     end
   end
 

@@ -5,7 +5,7 @@ module JSchema
     class Maximum < ValidatorBase
       private
 
-      self.keywords = ['maximum', 'exclusiveMaximum']
+      self.keywords = %w[maximum exclusiveMaximum]
 
       def validate_args(maximum, exclusive_maximum)
         number?(maximum) || invalid_schema('maximum', maximum)

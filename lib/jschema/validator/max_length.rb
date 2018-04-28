@@ -18,9 +18,7 @@ module JSchema
       end
 
       def validate_instance(instance)
-        if instance.size > @length_limit
-          "#{instance} is too long"
-        end
+        "#{instance} is too long" if instance.size > @length_limit
       end
     end
   end

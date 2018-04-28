@@ -17,9 +17,7 @@ module JSchema
       end
 
       def validate_instance(instance)
-        if instance.size > @max_items
-          "#{instance} has too many items"
-        end
+        "#{instance} has too many items" if instance.size > @max_items
       end
 
       def applicable_type

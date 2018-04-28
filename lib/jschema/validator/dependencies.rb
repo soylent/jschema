@@ -37,9 +37,7 @@ module JSchema
         @dependencies.each do |property, validator|
           if instance.key?(property)
             errors = validate_against_dependency(instance, validator, property)
-            unless errors.empty?
-              return errors.first
-            end
+            return errors.first unless errors.empty?
           end
         end and nil
       end

@@ -22,9 +22,7 @@ module JSchema
           schema.valid?(instance)
         end
 
-        unless valid
-          "#{instance} must be valid against any of the schemas"
-        end
+        "#{instance} must be valid against any of the schemas" unless valid
       end
     end
   end

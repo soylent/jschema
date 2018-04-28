@@ -69,9 +69,7 @@ module JSchema
 
           schemas.each do |schema|
             validation_errors = schema.validate(value)
-            unless validation_errors.empty?
-              return validation_errors.first
-            end
+            return validation_errors.first unless validation_errors.empty?
           end
         end
         nil
@@ -98,9 +96,7 @@ module JSchema
       end
 
       def additional_properties_schema
-        if @additional_properties.respond_to?(:validate)
-          @additional_properties 
-        end
+        @additional_properties if @additional_properties.respond_to?(:validate)
       end
 
       def pattern_properties_schema(field)

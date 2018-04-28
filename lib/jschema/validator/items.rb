@@ -49,9 +49,7 @@ module JSchema
         instance.to_enum.each_with_index do |item, index|
           schema = schema_for_item(index)
           validation_errors = schema.validate(item)
-          unless validation_errors.empty?
-            return validation_errors.first
-          end
+          return validation_errors.first unless validation_errors.empty?
         end
         nil
       end

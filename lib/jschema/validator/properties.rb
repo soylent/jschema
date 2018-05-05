@@ -75,8 +75,6 @@ module JSchema
         nil
       end
 
-      private
-
       def schemas_for(field)
         schemas = pattern_properties_schema(field)
 

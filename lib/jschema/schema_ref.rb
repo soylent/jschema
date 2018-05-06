@@ -3,14 +3,18 @@
 require 'delegate'
 
 module JSchema
-  # Schema reference is lazy evaluated.
+  # Lazily evaluated schema reference
+  #
+  # @api private
   class SchemaRef < Delegator
+    # @param uri [URI::Generic] schema URI
+    # @param parent [Schema] parent schema
     def initialize(uri, parent)
       @uri = uri
       @parent = parent
     end
 
-    def __getobj__
+    def __getobj__ # :nodoc:
       @schema ||= begin
         JSONReference.dereference(@uri, @parent) ||
           Kernel.raise(InvalidSchema, "Failed to dereference schema: #{@uri}")

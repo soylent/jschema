@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # An instance validates successfully against this keyword if it validates
+    # successfully against all schemas defined by this keyword's value.
     class AllOf < ValidatorBase
       private
 

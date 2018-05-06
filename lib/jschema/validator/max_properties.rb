@@ -2,6 +2,9 @@
 
 module JSchema
   module Validator
+    # An object instance is valid against "maxProperties" if its number
+    # of properties is less than, or equal to, the value of this
+    # keyword.
     class MaxProperties < ValidatorBase
       private
 

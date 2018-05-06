@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # This keyword specifies rules that are evaluated if the instance is an
+    # object and contains a certain property.
     class Dependencies < ValidatorBase
       private
 

@@ -2,6 +2,9 @@
 
 module JSchema
   module Validator
+    # An instance validates successfully against this keyword if its
+    # value is equal to one of the elements in this keyword's array
+    # value.
     class Enum < ValidatorBase
       private
 

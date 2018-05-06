@@ -4,6 +4,8 @@ require 'bigdecimal'
 
 module JSchema
   module Validator
+    # A numeric instance is valid only if division by this keyword's
+    # value results in an integer.
     class MultipleOf < ValidatorBase
       private
 

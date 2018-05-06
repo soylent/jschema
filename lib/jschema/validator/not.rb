@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # An instance is valid against this keyword if it fails to validate
+    # successfully against the schema defined by this keyword.
     class Not < ValidatorBase
       private
 

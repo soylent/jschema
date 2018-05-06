@@ -6,6 +6,16 @@ require 'webrick/httputils'
 
 module JSchema
   module Validator
+    # Validates format of an instance
+    #
+    # Supported formats:
+    #   * date-time
+    #   * email
+    #   * hostname
+    #   * ipv4
+    #   * ipv6
+    #   * uri
+    #   * regex
     class Format < ValidatorBase
       private
 

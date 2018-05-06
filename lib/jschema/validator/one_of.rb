@@ -2,6 +2,9 @@
 
 module JSchema
   module Validator
+    # An instance validates successfully against this keyword if it
+    # validates successfully against exactly one schema defined by this
+    # keyword's value.
     class OneOf < ValidatorBase
       private
 

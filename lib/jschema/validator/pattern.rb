@@ -2,12 +2,14 @@
 
 module JSchema
   module Validator
+    # A string instance is considered valid if the regular expression
+    # matches the instance successfully. 
     class Pattern < ValidatorBase
       private
 
       # Fix because of Rubinius
       unless defined? PrimitiveFailure
-        class PrimitiveFailure < Exception
+        class PrimitiveFailure < Exception # :nodoc:
         end
       end
 

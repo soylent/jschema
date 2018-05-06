@@ -3,11 +3,20 @@
 require 'webrick/httputils'
 
 module JSchema
+  # Schema URI
+  #
+  # @api private
   class SchemaURI
     class << self
-      # String, Schema, String
+      # Generate a schema URI
+      #
+      # @see RFC 3986, cl. 5.1
+      # @param schema_id [String] schema id
+      # @param parent_schema [Schema] parent schema
+      # @param id [String] default schema id
+      # @return [URI::Generic] schema URI
+      # @raise [InvalidSchema] if schema base URI cannot be established
       def build(schema_id, parent_schema, id)
-        # RFC 3986, cl. 5.1
         if parent_schema
           if parent_schema.uri.absolute?
             new_uri_part = schema_id ||

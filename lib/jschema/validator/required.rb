@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # An object instance is valid against this keyword if every item in
+    # the array is the name of a property in the instance.
     class Required < ValidatorBase
       private
 

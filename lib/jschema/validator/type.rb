@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # An instance validates if and only if the instance is in any of
+    # the sets listed for this keyword.
     class Type < ValidatorBase
       private
 
@@ -56,12 +58,16 @@ module JSchema
       end
 
       module Boolean
-        class << self
-          def ===(other)
-            other == true || other == false || super
-          end
+        # Returns true if a given value is true or false
+        #
+        # @param other [Object]
+        # @return [Boolean]
+        def self.===(other)
+          other == true || other == false || super
         end
       end
+
+      private_constant :Boolean
     end
   end
 end

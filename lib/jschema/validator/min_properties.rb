@@ -2,6 +2,9 @@
 
 module JSchema
   module Validator
+    # An object instance is valid against "minProperties" if its number
+    # of properties is greater than, or equal to, the value of this
+    # keyword.
     class MinProperties < ValidatorBase
       private
 

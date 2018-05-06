@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # An array instance is valid against "maxItems" if its size is less
+    # than, or equal to, the value of this keyword.
     class MaxItems < ValidatorBase
       private
 

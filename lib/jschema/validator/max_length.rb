@@ -4,6 +4,8 @@ require 'jschema/string_length_validator'
 
 module JSchema
   module Validator
+    # A string instance is valid against this keyword if its length is
+    # less than, or equal to, the value of this keyword.
     class MaxLength < StringLengthValidator
       private
 

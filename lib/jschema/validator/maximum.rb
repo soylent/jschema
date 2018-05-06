@@ -2,6 +2,8 @@
 
 module JSchema
   module Validator
+    # If the instance is a number, then this keyword validates only if
+    # the instance is less than or exactly equal to "maximum".
     class Maximum < ValidatorBase
       private
 

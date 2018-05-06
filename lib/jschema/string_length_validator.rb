@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module JSchema
+  # Base class for the maxLength and minLength validators
+  #
+  # @api private
   class StringLengthValidator < ValidatorBase
     private
 

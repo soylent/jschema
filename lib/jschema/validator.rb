@@ -25,7 +25,13 @@ require 'jschema/validator/minimum'
 require 'jschema/validator/format'
 
 module JSchema
+  # JSON schema validators
   module Validator
+    # Build a list of validators from a given JSON schema
+    #
+    # @param schema [Hash] JSON schema
+    # @param parent [Schema] parent schema
+    # @return [Array<ValidatorBase>]
     def self.build(schema, parent)
       if schema.is_a?(Hash)
         constants.map do |validator_class_sym|

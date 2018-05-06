@@ -2,6 +2,9 @@
 
 module JSchema
   module Validator
+    # If the instance is a number, then the instance is valid only if
+    # it has a value strictly greater than (not equal to)
+    # "exclusiveMinimum".
     class Minimum < ValidatorBase
       private
 

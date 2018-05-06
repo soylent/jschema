@@ -2,6 +2,7 @@
 
 module JSchema
   module Validator
+    # Determines how child instances validate for arrays
     class Items < ValidatorBase
       private
 

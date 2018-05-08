@@ -7,8 +7,11 @@ module JSchema
   #
   # @api private
   module JSONReference
-    @mutex = Mutex.new
-    @schemas = {}
+    MUTEX = Mutex.new
+    private_constant :MUTEX
+
+    SCHEMAS = {}
+    private_constant :SCHEMAS
 
     class << self
       # Register a schema so that it can be dereferenced later by its URI
@@ -18,9 +21,7 @@ module JSchema
       def register_schema(schema)
         schema_key = key(normalize(schema.uri), schema)
 
-        @mutex.synchronize do
-          @schemas[schema_key] = schema
-        end
+        MUTEX.synchronize { SCHEMAS[schema_key] = schema }
       end
 
       # Look up a schema by URI relative to another schema
@@ -30,8 +31,8 @@ module JSchema
       # @return [Schema]
       def dereference(uri, schema)
         schema_key = key(expand_uri(uri, schema), schema)
-        cached_schema = @mutex.synchronize do
-          @schemas[schema_key] if schema_key
+        cached_schema = MUTEX.synchronize do
+          SCHEMAS[schema_key] if schema_key
         end
 
         if cached_schema
